@@ -1,0 +1,51 @@
+<div class="invoice">
+    <div class="card">
+      <!-- Header with sender and receiver information -->
+      <!-- Invoice table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoiceItems; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.item }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitCost | currency }}</td>
+            <td>{{ item.total | currency }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">Subtotal</td>
+            <td>{{ subtotal | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">Discount (20%)</td>
+            <td>-{{ discount | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">VAT (10%)</td>
+            <td>{{ vat | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan="5"><strong>Total</strong></td>
+            <td><strong>{{ total | currency }}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+      <!-- Footer with additional info -->
+      <div class="card-footer">
+        <button class="btn btn-primary" (click)="proceedToPayment()">Proceed to Payment</button>
+      </div>
+    </div>
+  </div>
+  
