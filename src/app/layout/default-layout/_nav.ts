@@ -41,11 +41,13 @@ export const navItems: INavData[] = [
     name: 'Clients',
     url: '/theme/colors',
     iconComponent: { name: 'cil-people' }
-  },{
+  },
+  {
     name: 'Clients Table',
     url: '/client-table',
     iconComponent: { name: 'cil-people' }
   },
+  
   {
     name: 'Employee',
     url: '/theme/typography',
@@ -63,7 +65,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Demande list',
-    url: '/demande-client', // This should match the route you defined in your Angular router
+    url: '/demande', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
   },
   {

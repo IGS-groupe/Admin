@@ -1,0 +1,106 @@
+
+
+// General container styling
+.table-container {
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  h2 {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+// Table styling
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+
+  th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  tbody + tbody {
+    border-top: 2px solid #dee2e6;
+  }
+}
+
+// Button styling
+button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &.accept-button {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    
+    &:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+  }
+
+  &.refuse-button {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+
+    &:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+  }
+
+  &.more-info-button {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+
+    &:hover {
+      background-color: #138496;
+      border-color: #117a8b;
+    }
+  }
+}
+
+// Responsive styling
+@media (max-width: 768px) {
+  .table-container {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

@@ -20,7 +20,7 @@ export const routes: Routes = [
       },
       {
         path: 'invoice',
-        loadChildren: () => import('./views/demande-client/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/invoice/routes').then((m) => m.routes)
         }
       ,{
         path: 'demandelist',
@@ -35,9 +35,13 @@ export const routes: Routes = [
             loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
             },
             {
-              path: '',
+              path: 'demande-client',
               loadChildren: () => import('./views/demande-client/routes').then((m) => m.routes)
               },
+              {
+                path: 'demande',
+                loadChildren: () => import('./views/demande/routes').then((m) => m.routes)
+                },
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

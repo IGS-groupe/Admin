@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let demande of demandes">
+        <tr *ngFor="let demande of demandes; let i = index" >
           <td>{{ demande.DemandeID }}</td>
           <td>{{ demande.DemandePour }}</td>
           <td>{{ demande.EnvoyeAuLaboratoire }}</td>
