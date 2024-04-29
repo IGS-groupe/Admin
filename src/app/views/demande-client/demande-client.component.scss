@@ -1,0 +1,29 @@
+.demande-client-table {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+      }
+  
+      button {
+        padding: 5px 10px;
+        margin-right: 5px;
+        cursor: pointer;
+        background-color: #4CAF50; // Green for accept
+        color: white;
+  
+        &:last-child {
+          background-color: #f44336; // Red for refuse
+        }
+      }
+    }
+  }
+  

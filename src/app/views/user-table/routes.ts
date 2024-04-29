@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { InvoiceComponent} from './invoice.component';
+import { UserTableComponent} from './user-table.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: InvoiceComponent,
+    component: UserTableComponent,
     data: {
-      title: 'Invoice'
+      title: 'table'
     }
   }
 ];

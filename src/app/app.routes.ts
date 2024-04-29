@@ -20,12 +20,24 @@ export const routes: Routes = [
       },
       {
         path: 'invoice',
-        loadChildren: () => import('./views/invoice/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/demande-client/routes').then((m) => m.routes)
         }
       ,{
         path: 'demandelist',
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
         },
+        {
+          path: 'user-table',
+          loadChildren: () => import('./views/user-table/routes').then((m) => m.routes)
+          },
+          {
+            path: 'client-table',
+            loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
+            },
+            {
+              path: '',
+              loadChildren: () => import('./views/demande-client/routes').then((m) => m.routes)
+              },
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
