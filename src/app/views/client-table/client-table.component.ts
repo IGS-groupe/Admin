@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.scss'
 })
