@@ -1,43 +1,42 @@
 <div class="table-container">
-    <h2>Combined Information</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Client Name</th>
-          <th>Demande ID</th>
-          <th>Demande Pour</th>
-          <th>Envoye Au Laboratoire</th>
-          <th>Bon De Commande</th>
-          <th>Langue Du Certificat</th>
-          <th>Echantillon ID</th>
-          <th>Gabarit</th>
-          <th>Type Echantillon</th>
-          <th>Parameter ID</th>
-          <th>Parameter Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Use *ngFor to iterate over the combinedData array -->
-        <tr *ngFor="let data of combinedData">
-          <td>{{ data.clientName }}</td>
-          <td>{{ data.demande.DemandeID }}</td>
-          <td>{{ data.demande.DemandePour }}</td>
-          <td>{{ data.demande.EnvoyeAuLaboratoire }}</td>
-          <td>{{ data.demande.BonDeCommande }}</td>
-          <td>{{ data.demande.LangueDuCertificat }}</td>
-          <td>{{ data.echantillon.EchantillonID }}</td>
-          <td>{{ data.echantillon.Gabarit }}</td>
-          <td>{{ data.echantillon.TypeEchantillon }}</td>
-          <td>{{ data.parameter.ParameterID }}</td>
-          <td>{{ data.parameter.Name }}</td>
-          <td>
-            <button (click)="accept(data)">Accept</button>
-            <button (click)="refuse(data)">Refuse</button>
-            <button (click)="moreInfo(data)">More Info</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2>Combined Information</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Client Name</th>
+        <th>Demande ID</th>
+        <th>Demande Pour</th>
+        <th>Envoye Au Laboratoire</th>
+        <th>Bon De Commande</th>
+        <th>Langue Du Certificat</th>
+        <th>Echantillon ID</th>
+        <th>Gabarit</th>
+        <th>Type Echantillon</th>
+        <th>Parameter ID</th>
+        <th>Parameter Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to iterate over the combinedData array -->
+      <tr *ngFor="let data of combinedData">
+        <td>{{ data.clientName }}</td>
+        <td>{{ data.demande.DemandeID }}</td>
+        <td>{{ data.demande.DemandePour }}</td>
+        <td>{{ data.demande.EnvoyeAuLaboratoire }}</td>
+        <td>{{ data.demande.BonDeCommande }}</td>
+        <td>{{ data.demande.LangueDuCertificat }}</td>
+        <td>{{ data.echantillon.EchantillonID }}</td>
+        <td>{{ data.echantillon.Gabarit }}</td>
+        <td>{{ data.echantillon.TypeEchantillon }}</td>
+        <td>{{ data.parameter.ParameterID }}</td>
+        <td>{{ data.parameter.Name }}</td>
+        <td>
+          <button (click)="accept(data)">Accept</button>
+          <button (click)="refuse(data)">Refuse</button>
+          <button (click)="moreInfo(data)">More Info</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
