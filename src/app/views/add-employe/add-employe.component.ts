@@ -12,12 +12,11 @@ export class AddEmployeComponent {
   formData = {
     firstName: '',
     lastName: '',
+    employename:'',
     email: '',
     password: '',
-    confirmpassword: '',
-    calcification: '',
-    startDate: '',
-    specialite: ''
+    
+    gender:'',
   };
 
   handleSubmit() {

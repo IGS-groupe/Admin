@@ -1,42 +1,61 @@
-<div class="table-container">
-  <h2>Combined Information</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Client Name</th>
-        <th>Demande ID</th>
-        <th>Demande Pour</th>
-        <th>Envoye Au Laboratoire</th>
-        <th>Bon De Commande</th>
-        <th>Langue Du Certificat</th>
-        <th>Echantillon ID</th>
-        <th>Gabarit</th>
-        <th>Type Echantillon</th>
-        <th>Parameter ID</th>
-        <th>Parameter Name</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Use *ngFor to iterate over the combinedData array -->
-      <tr *ngFor="let data of combinedData">
-        <td>{{ data.clientName }}</td>
-        <td>{{ data.demande.DemandeID }}</td>
-        <td>{{ data.demande.DemandePour }}</td>
-        <td>{{ data.demande.EnvoyeAuLaboratoire }}</td>
-        <td>{{ data.demande.BonDeCommande }}</td>
-        <td>{{ data.demande.LangueDuCertificat }}</td>
-        <td>{{ data.echantillon.EchantillonID }}</td>
-        <td>{{ data.echantillon.Gabarit }}</td>
-        <td>{{ data.echantillon.TypeEchantillon }}</td>
-        <td>{{ data.parameter.ParameterID }}</td>
-        <td>{{ data.parameter.Name }}</td>
-        <td>
-          <button (click)="accept(data)">Accept</button>
-          <button (click)="refuse(data)">Refuse</button>
-          <button (click)="moreInfo(data)">More Info</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="form-container">
+  <div class="main-title">
+    <h1>Nouvelle demande</h1>
+    <p class="required-note"><span>*</span>: obligatoire</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Nouvelle demande</h2>
+      <div class="card-actions">
+        <button type="button" class="btn draft-btn">Enregistrer comme brouillon</button>
+        <button type="button" class="btn submit-btn">Transmettre la demande</button>
+      </div>
+    </div>
+  <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="demandePour">Demande pour:</label>
+      <input type="text" class="form-control" formControlName="demandePour" id="demandePour">
+    </div>
+
+    <div class="form-group">
+      <label for="envoyeAuLaboratoire">Envoyé au laboratoire:</label>
+      <input type="text" class="form-control" formControlName="envoyeAuLaboratoire" id="envoyeAuLaboratoire">
+    </div>
+
+    <div class="form-row">
+      
+      <div class="form-group textarea-group">
+        <label for="courrielsSupplementaires">Courriels supplémentaires:</label>
+        <textarea class="form-control" formControlName="courrielsSupplementaires" id="courrielsSupplementaires"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="unEchantillon">Tous échantillons:</label>
+        <input type="checkbox" formControlName="unEchantillon" id="unEchantillon">
+      </div>
+    </div>
+   
+
+    <div class="form-group">
+      <label for="bonDeCommande">Bon de commande:</label>
+      <input type="text" class="form-control" formControlName="bonDeCommande" id="bonDeCommande">
+    </div>
+
+  
+
+    <div class="form-group">
+      <label for="langueDuCertificat">Langue du certificat:</label>
+      <select class="form-control" formControlName="langueDuCertificat" id="langueDuCertificat">
+        <option value="FRANCAIS">Français</option>
+        <option value="ANGLAIS">Anglais</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="commentairesInternes">Commentaires internes de la demande d'analyses:</label>
+      <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>

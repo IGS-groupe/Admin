@@ -1,0 +1,49 @@
+
+<div class="form-container">
+    <div class="main-title">
+        <h1>List de Paramater</h1>
+        <p class="required-note"><span>*</span>: obligatoire</p>
+    </div>
+    <div class="add-parameter-form">
+        <form (ngSubmit)="addParameter()">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newParameter.name" name="name" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="RDL" [(ngModel)]="newParameter.rdl" name="rdl" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Unit" [(ngModel)]="newParameter.unit" name="unit" required>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Add Parameter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Analyte</th>
+                <th scope="col">RDL</th>
+                <th scope="col">Unit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let analyte of parameters; let i = index">
+                <th scope="row">
+                    <input type="checkbox"
+                           [name]="'check-' + analyte.name.toLowerCase()"
+                           [value]="analyte.name"
+                           (change)="toggleAnalyteSelection(analyte)">
+                </th>
+                <td>{{ analyte.name }}</td>
+                <td>{{ analyte.rdl }}</td>
+                <td>{{ analyte.unit }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="submitAnalytes()">Submit</button>
+</div>
