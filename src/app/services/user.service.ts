@@ -15,4 +15,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users`); // Adjust endpoint as needed
   }
+  login(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/auth/signin`, formData);
+  }
 }

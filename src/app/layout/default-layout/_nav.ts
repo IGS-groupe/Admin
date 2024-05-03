@@ -80,7 +80,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Lougout',
-    url: '/', // This should match the route you defined in your Angular router
+    url: 'login', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cilAccountLogout' } // Change 'cil-wallet' to whatever icon you prefer
   },
   /*
