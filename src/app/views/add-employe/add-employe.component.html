@@ -5,7 +5,7 @@
   <div class="card-container">
     <div class="card-body">
       <h4>Add Employee</h4>
-      <form (ngSubmit)="handleSubmit()">
+      <form (ngSubmit)="registerAdmin()">
         <div class="row">
           <div class="col-md-6">
             <div class="input-group mb-3">
@@ -27,7 +27,7 @@
           </div>
           
           <div class="col-md-6">
-            <select class="form-control" name="gender" [(ngModel)]="formData.gender" required>
+            <select class="form-control" name="gender" [(ngModel)]="formData.genre" required>
               <option value="" disabled selected>Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Employe Name" name="employename" [(ngModel)]="formData.employename" required>
+            <input type="text" class="form-control" placeholder="Employe Name" name="employename" [(ngModel)]="formData.username" required>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-top: 20px; background-color: red; color: white;">Add Employee</button>

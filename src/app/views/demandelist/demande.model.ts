@@ -1,11 +1,15 @@
 export interface Demande {
-    DemandeID: number;
-    DemandePour: string;
-    EnvoyeAuLaboratoire: string;
-    CourrielsSupplementaires: string;
-    BonDeCommande: string;
-    UnEchantillon: boolean;
-    LangueDuCertificat: 'francais' | 'anglais';
-    CommentairesInternes: string;
-  }
-  
+  demandeId: number;
+  demandePour: string;
+  envoyeAuLaboratoire: string;
+  courrielsSupplementaires: string;
+  bonDeCommande: string;
+  unEchantillon: boolean;
+  etat: Etat; // Assuming etat is a nested object based on your example
+  langueDuCertificat: string;
+  commentairesInternes: string;
+}
+
+export interface Etat {
+  etat: string;
+}

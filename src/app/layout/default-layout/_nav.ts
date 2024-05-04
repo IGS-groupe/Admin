@@ -37,20 +37,20 @@ export const navItems: INavData[] = [
     title: true,
     name: 'User'
   },
+  // {
+  //   name: 'Clients',
+  //   url: '/theme/colors',
+  //   iconComponent: { name: 'cil-people' }
+  // },
   {
     name: 'Clients',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-people' }
-  },
-  {
-    name: 'Clients Table',
     url: '/client-table',
     iconComponent: { name: 'cil-people' }
   },
   
   {
     name: 'Employee',
-    url: '/theme/typography',
+    url: '/Employess',
     linkProps: { fragment: 'headings' },
     iconComponent: { name: 'cil-user' }
   },
@@ -58,23 +58,18 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Invoicing'
   },
-  {
-    name: 'Invoice',
-    url: '/invoice', // This should match the route you defined in your Angular router
-    iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
-  },
+  // {
+  //   name: 'Invoice',
+  //   url: '/invoice', // This should match the route you defined in your Angular router
+  //   iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
+  // },
   {
     name: 'Demande list',
-    url: '/demande', // This should match the route you defined in your Angular router
+    url: '/Listdemandes', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
   },
   {
-    name: 'Add Employee',
-    url: '/add_employee', // This should match the route you defined in your Angular router
-    iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
-  },
-  {
-    name: 'Add Parametre',
+    name: 'Parametres',
     url: '/add_parametre', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
   },

@@ -1,1 +1,31 @@
-<h1>demande</h1>
+<div class="demande-client-table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Demande Pour</th>
+          <th>Envoyé Au Laboratoire</th>
+          <th>Courriels Supplémentaires</th>
+          <th>Bon De Commande</th>
+          <th>Langue Du Certificat</th>
+          <th>Commentaires Internes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demandes; let i = index">
+            <td>{{ demande.demandeId }}</td>
+            <td>{{ demande.demandePour }}</td>
+            <td>{{ demande.envoyeAuLaboratoire }}</td>
+            <td>{{ demande.courrielsSupplementaires }}</td>
+            <td>{{ demande.bonDeCommande }}</td>
+            <td>{{ demande.langueDuCertificat }}</td>
+            <td>{{ demande.commentairesInternes }}</td>
+          <td>
+            <button class="accept-btn" (click)="details(demande.demandeId)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

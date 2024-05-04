@@ -1,0 +1,29 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Numéro d'échantillon</th>
+          <th>Nom de l'échantillon</th>
+          <th>Type d'échantillon</th>
+          <th>Lieu de prélèvement</th>
+          <th>Type de prélèvement</th>
+          <th>Date de début de prélèvement</th>
+          <th>Statut</th>
+          <th>Détails</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let echantillon of echantillons">
+          <td>{{ echantillon.echantillonId }}</td>
+          <td>{{ echantillon.nomEchantillon }}</td>
+          <td>{{ echantillon.typeEchantillon }}</td>
+          <td>{{ echantillon.lieuPrelevement }}</td>
+          <td>{{ echantillon.typeEchantillon }}</td> <!-- Assuming 'Type de prélèvement' is the same as 'Type d'échantillon' -->
+          <td>{{ echantillon.dateFinPrelevement }}</td>
+          <td>Resultats complètes</td>
+          <td><button class="details-button">Détails</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

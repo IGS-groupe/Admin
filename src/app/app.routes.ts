@@ -27,24 +27,29 @@ export const routes: Routes = [
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
         },
         {
-          path: 'user-table',
-          loadChildren: () => import('./views/user-table/routes').then((m) => m.routes)
-          },
-          {
-            path: 'client-table',
-            loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
-            },
-            {
-              path: 'demande-client',
-              loadChildren: () => import('./views/demande-client/routes').then((m) => m.routes)
-              },
-                {
-                  path: 'add_employee',
-                  loadChildren: () => import('./views/add-employe/routes').then((m) => m.routes)
-                  },{
-                    path: 'add_parametre',
-                    loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
-                    },
+          path: 'echantillonList',
+          loadComponent: () => import('./views/list-echantillon/list-echantillon.component').then(m => m.ListEchantillonComponent),
+        },
+      {
+        path: 'Employess',
+        loadComponent: () => import('./views/list-employee/list-employee.component').then(m => m.ListEmployeeComponent),
+      },
+      {
+        path: 'client-table',
+        loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
+      },
+      {
+        path: 'Listdemandes',
+        loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
+      },
+      {
+        path: 'add_employee',
+        loadChildren: () => import('./views/add-employe/routes').then((m) => m.routes)
+      },
+      {
+        path: 'add_parametre',
+        loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
+      },
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

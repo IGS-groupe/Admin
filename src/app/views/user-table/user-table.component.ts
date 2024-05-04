@@ -19,22 +19,22 @@ export class UserTableComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    this.userService.getUsers().subscribe({
-      next: (users) => {
-        this.users = users;
-      },
-      error: (err) => {
-        console.error('Error fetching users:', err);
-      }
+    this.userService.getClient().then(users => {
+      this.users = users;
+    }).catch(error => {
+      console.error('Error fetching users:', error);
     });
   }
+
   editUser(user: User): void {
     // Logic to edit user
     console.log('Edit user:', user);
+    // You might need to implement a PUT or PATCH request in UserService if not already done
   }
 
   deleteUser(userId: number): void {
     // Logic to delete user
     console.log('Delete user ID:', userId);
+    // You might need to implement a DELETE request in UserService if not already done
   }
 }

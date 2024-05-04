@@ -1,4 +1,7 @@
 <div class="client-table-container">
+    <div class="table-header">
+        <button (click)="navigateToDashboard()">Add Client</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -11,7 +14,7 @@
       <tbody>
         <tr *ngFor="let client of clients">
           <td>{{ client.id }}</td>
-          <td>{{ client.firstName   }}</td>
+          <td>{{ client.firstName }}</td>
           <td>{{ client.email }}</td>
           <td>
             <button>Edit</button>
