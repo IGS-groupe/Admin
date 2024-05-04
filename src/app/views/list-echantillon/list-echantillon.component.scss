@@ -1,40 +1,89 @@
+/* Style for the table container */
 .table-container {
-    margin: 20px;
-    overflow-x: auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px 16px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #007BFF;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .details-button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .details-button:hover {
-    background-color: #45a249;
-  }
-  
+  margin-top: 20px;
+  overflow-x: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f4f4f9;
+  color: #333;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style for the details button */
+.details-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.details-button:hover {
+  background-color: #45a049;
+}
+
+/* Style for the status controls */
+.status-controls {
+  display: flex;
+  justify-content: flex-end;  /* Aligns children to the right */
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  gap: 10px;  /* Adds space between select and button */
+}
+
+/* Style for the select dropdown */
+.status-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Style for the update button */
+.update-button {
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #005f87;
+}

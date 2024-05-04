@@ -70,7 +70,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Parametres',
-    url: '/add_parametre', // This should match the route you defined in your Angular router
+    url: '/ListParamater', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
   },
   {

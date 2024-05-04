@@ -35,8 +35,8 @@ export class DemandelistComponent implements OnInit {
       console.error('Failed to load demandes:', error);
     });
   }
-  details(demandeId:number){
-    this.router.navigate(['/echantillonList'], { queryParams: { demandeId: demandeId } });
+  details(demandeId:number , etat:string){
+    this.router.navigate(['/echantillonList'], { queryParams: { demandeId: demandeId, etat:etat } });
   }
   acceptDemande(id: number) {
     console.log('Demande accepted with ID:', id);

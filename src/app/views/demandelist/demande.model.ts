@@ -5,7 +5,7 @@ export interface Demande {
   courrielsSupplementaires: string;
   bonDeCommande: string;
   unEchantillon: boolean;
-  etat: Etat; // Assuming etat is a nested object based on your example
+  etat: string; // Assuming etat is a nested object based on your example
   langueDuCertificat: string;
   commentairesInternes: string;
 }

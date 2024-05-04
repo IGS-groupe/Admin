@@ -22,7 +22,7 @@
             <td>{{ demande.langueDuCertificat }}</td>
             <td>{{ demande.commentairesInternes }}</td>
           <td>
-            <button class="accept-btn" (click)="details(demande.demandeId)">Details</button>
+            <button class="accept-btn" (click)="details(demande.demandeId , demande.etat)">Details</button>
           </td>
         </tr>
       </tbody>
