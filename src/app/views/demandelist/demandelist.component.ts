@@ -33,9 +33,10 @@ export class DemandelistComponent implements OnInit {
       this.demandes = demandes;
     }).catch(error => {
       console.error('Failed to load demandes:', error);
+      this.router.navigate(['/account/login'])
     });
   }
-  details(demandeId:number , etat:string){
+  details(demandeId:number , etat : string ){
     this.router.navigate(['/echantillonList'], { queryParams: { demandeId: demandeId, etat:etat } });
   }
   acceptDemande(id: number) {

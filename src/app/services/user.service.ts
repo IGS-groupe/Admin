@@ -53,4 +53,18 @@ export class UserService {
       }
     }).then(response => response.data));
   }
+  get isAdmin(): Promise<boolean> {
+    const token = localStorage.getItem('token');
+    return axios.get<User[]>(`${this.apiUrl}/users/role/admin`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      // Assuming the response will be an array of users with at least one admin
+      return response.data.length > 0;
+    }).catch(error => {
+      console.error('Error fetching users', error);
+      return false; // Return false if there is an error fetching users
+    });
+  }
 }
