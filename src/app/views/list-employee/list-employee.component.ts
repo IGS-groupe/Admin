@@ -27,6 +27,7 @@ export class ListEmployeeComponent {
       this.clients = users;
     }).catch(error => {
       console.error('Error fetching users:', error);
+      this.router.navigate(['/login']);
     });
   }
   navigateToDashboard(): void {

@@ -1,7 +1,6 @@
 import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
-  
   {
     title: true,
     name: 'User'
@@ -37,5 +36,5 @@ export const navItems: INavData[] = [
     url: 'login', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cilAccountLogout' } // Change 'cil-wallet' to whatever icon you prefer
   },
-  
+ 
 ];

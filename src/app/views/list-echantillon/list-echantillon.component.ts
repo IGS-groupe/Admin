@@ -34,6 +34,7 @@ export class ListEchantillonComponent implements OnInit {
       this.echantillons = echantillons;
     }).catch(error => {
       console.error('Failed to load echantillons:', error);
+      this.router.navigate(['/login']);
     });
   }
 

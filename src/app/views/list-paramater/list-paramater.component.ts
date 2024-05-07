@@ -40,6 +40,7 @@ export class ListParamaterComponent implements OnInit, AfterViewInit {
       this.dataSource.data = parameters;
     }).catch(error => {
       console.error('Error fetching parameters:', error);
+      this.router.navigate(['/login']);
     });
   }
 

@@ -13,7 +13,8 @@ export class UserService {
   constructor() {}
 
   getClient(): Promise<User[]> {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('token');
+    console.log(token); // Retrieve the token from localStorage
     return axios.get<User[]>(`${this.apiUrl}/users/role/user`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -53,18 +54,17 @@ export class UserService {
       }
     }).then(response => response.data));
   }
-  get isAdmin(): Promise<boolean> {
+  isAdmin(): Promise<boolean> {
     const token = localStorage.getItem('token');
     return axios.get<User[]>(`${this.apiUrl}/users/role/admin`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     }).then(response => {
-      // Assuming the response will be an array of users with at least one admin
       return response.data.length > 0;
     }).catch(error => {
       console.error('Error fetching users', error);
-      return false; // Return false if there is an error fetching users
+      return false;
     });
   }
 }

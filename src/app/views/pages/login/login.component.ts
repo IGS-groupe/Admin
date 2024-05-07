@@ -32,6 +32,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
   ) { 
+    localStorage.clear();
     this.loginForm = this.formBuilder.group({
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required]
@@ -53,7 +54,7 @@ export class LoginComponent {
       .then(response => {
         localStorage.setItem('userId', response.userId.toString());
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/Listdemandes']);
       })
       .catch(error => {
         console.error('API Error:', error);

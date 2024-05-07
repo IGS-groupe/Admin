@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
@@ -17,8 +17,9 @@ import {
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from './_nav';
+import { UserService } from 'src/app/services/user.service';
 
-function isOverflown(element: HTMLElement) {
+function isOverflown(element: HTMLElement): boolean {
   return (
     element.scrollHeight > element.clientHeight ||
     element.scrollWidth > element.clientWidth
@@ -48,12 +49,28 @@ function isOverflown(element: HTMLElement) {
     DefaultFooterComponent
   ]
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
+  public isAdmin = false;
 
-  onScrollbarUpdate($event: any) {
-    // if ($event.verticalUsed) {
-    // console.log('verticalUsed', $event.verticalUsed);
-    // }
+  constructor(private authService: UserService) {
+    this.checkAdminStatus();
+  }
+
+  ngOnInit(): void {
+    
+  }
+
+  private async checkAdminStatus(): Promise<void> {
+    this.isAdmin = await this.authService.isAdmin();
+    console.log(this.isAdmin);
+    if (!this.isAdmin) {
+      this.navItems = this.navItems.filter(item => item.name !== 'Employee');
+      console.log(this.isAdmin);
+    }
+  }
+
+  onScrollbarUpdate($event: any): void {
+    // Additional scrollbar update logic can be placed here.
   }
 }

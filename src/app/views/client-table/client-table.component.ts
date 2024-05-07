@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-table',
@@ -13,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ClientTableComponent  implements OnInit {
   clients: User[] = [];
 
-  constructor(private userService: UserService,) { }
+  constructor(private userService: UserService,private router: Router) { }
 
   ngOnInit() {
     this.fetchUsers();
@@ -24,6 +25,7 @@ export class ClientTableComponent  implements OnInit {
       this.clients = users;
     }).catch(error => {
       console.error('Error fetching users:', error);
+      this.router.navigate(['/login']);
     });
   }
 }
