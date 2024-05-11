@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,14 +12,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-employe.component.scss']
 })
 export class AddEmployeComponent {
-  formData = {
-    id:0,
+  formData: User = {
+    id: 0,
     firstName: '',
     lastName: '',
-    username:'',
+    username: '',
     email: '',
     password: '',
-    genre:'',
+    genre: '',
+    active: true  // Ensure 'active' is included from the start
   };
   constructor(private router: Router,private authService: UserService) { }
 

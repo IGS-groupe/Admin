@@ -1,27 +1,25 @@
 <div class="client-table-container">
-    <div class="table-header">
-        <button (click)="navigateToDashboard()">Add Client</button>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Client Name</th>
-          <th>Contact Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let client of clients">
-          <td>{{ client.id }}</td>
-          <td>{{ client.firstName }}</td>
-          <td>{{ client.email }}</td>
-          <td>
-            <button>Edit</button>
-            <button>Contact</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="table-header">
+      <button (click)="navigateToDashboard()">Add Admin</button>
   </div>
-  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>admin Name</th>
+        <th>Contact Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of Admins">
+        <td>{{ admin.id }}</td>
+        <td>{{ admin.firstName }}</td>
+        <td>{{ admin.email }}</td>
+        <td>
+          <button (click)="deleteAdmin(admin.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

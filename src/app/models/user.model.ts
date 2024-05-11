@@ -12,5 +12,6 @@ export interface Role {
     email: string;
     password: string;
     genre: string;
+    active: boolean;
   }
   

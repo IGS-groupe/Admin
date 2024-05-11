@@ -54,6 +54,18 @@ export class UserService {
       }
     }).then(response => response.data));
   }
+  disableUser(userId: number): Promise<any> {
+    const token = localStorage.getItem('token');
+    return axios.put(`${this.apiUrl}/users/disable/${userId}`, {}, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error disabling user account', error);
+        throw error;
+      });
+  }
   isAdmin(): Promise<boolean> {
     const token = localStorage.getItem('token');
     return axios.get<User[]>(`${this.apiUrl}/users/role/admin`, {
@@ -61,10 +73,22 @@ export class UserService {
         'Authorization': `Bearer ${token}`
       }
     }).then(response => {
-      return response.data.length > 0;
+      return true;
     }).catch(error => {
       console.error('Error fetching users', error);
       return false;
     });
+  }
+  deleteUser(userId: number): Promise<any> {
+    const token = localStorage.getItem('token');
+    return axios.delete(`${this.apiUrl}/users/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error deleting user', error);
+        throw error;
+      });
   }
 }

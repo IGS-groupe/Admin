@@ -28,4 +28,13 @@ export class ClientTableComponent  implements OnInit {
       this.router.navigate(['/login']);
     });
   }
+  disable(userId: number) {
+    this.userService.disableUser(userId).then(response => {
+      console.log('User disabled successfully', response);
+      this.fetchUsers();
+    }).catch(error => {
+      console.error('Failed to disable user', error);
+      // Handle errors, maybe show a message to the user
+    });
+  }
 }

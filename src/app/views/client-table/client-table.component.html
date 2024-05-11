@@ -1,24 +1,22 @@
 <div class="client-table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Client Name</th>
-          <th>Contact Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let client of clients">
-          <td>{{ client.id }}</td>
-          <td>{{ client.firstName   }}</td>
-          <td>{{ client.email }}</td>
-          <td>
-            <button>Edit</button>
-            <button>Contact</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Client Name</th>
+        <th>Contact Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.id }}</td>
+        <td>{{ client.firstName   }}</td>
+        <td>{{ client.email }}</td>
+        <td>
+          <button (click)="disable(client.id)">{{ client.active ? 'Désactiver' : 'Activer' }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

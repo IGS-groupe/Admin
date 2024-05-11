@@ -28,7 +28,9 @@ export class ListEchantillonComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.demandeId = params['demandeId'];
-      this.etat = params['etat'];
+      if (params['etat']) {
+        this.selectedStatut = params['etat'];  // Set the selected status based on the URL parameter
+      }
     });
     this.echantillonService.getEchantillonsByDemandeId(this.demandeId).then(echantillons => {
       this.echantillons = echantillons;

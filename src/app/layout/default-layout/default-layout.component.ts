@@ -65,7 +65,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.isAdmin = await this.authService.isAdmin();
     console.log(this.isAdmin);
     if (!this.isAdmin) {
-      this.navItems = this.navItems.filter(item => item.name !== 'Employee');
+      this.navItems = this.navItems.filter(item => item.name !== 'Admin');
       console.log(this.isAdmin);
     }
   }

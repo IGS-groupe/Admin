@@ -12,7 +12,7 @@ export const navItems: INavData[] = [
   },
   
   {
-    name: 'Employee',
+    name: 'Admin',
     url: '/Employess',
     linkProps: { fragment: 'headings' },
     iconComponent: { name: 'cil-user' }
