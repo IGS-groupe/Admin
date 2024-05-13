@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-paramater.component.scss'
 })
 export class ListParamaterComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'rdl', 'unit'];
+  displayedColumns: string[] = ['name', 'rdl', 'unit', 'available'];
   dataSource = new MatTableDataSource<Parameter>();
   selection = new SelectionModel<Parameter>(true, []);
   newParameter = { name: '', rdl: 0, unit: '' };
@@ -59,7 +59,18 @@ export class ListParamaterComponent implements OnInit, AfterViewInit {
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-
+  updateAvailability(parameter: Parameter): void {
+    this.parameterService.updateParameterAvailability(parameter.parameterId!, !parameter.available)
+      .then(updatedParameter => {
+        const index = this.dataSource.data.findIndex(p => p.parameterId === updatedParameter.parameterId);
+        if (index !== -1) {
+          this.dataSource.data[index].available = updatedParameter.available;
+        }
+      })
+      .catch(error => {
+        console.error('Error updating parameter availability:', error);
+      });
+  }
   submitAnalytes(): void {
     const selectedParameters = this.selection.selected;
     console.log('Submitted analytes:', selectedParameters);

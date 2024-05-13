@@ -1,27 +1,26 @@
 <div class="form-container">
-    <div class="main-title">
-      <h1>List of Parameters</h1>
-      <p class="required-note"><span>*</span>: required</p>
-    </div>
-    <div class="add-parameter-form">
-      <form (ngSubmit)="addParameter()">
-        <div class="form-row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newParameter.name" name="name" required>
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="RDL" [(ngModel)]="newParameter.rdl" name="rdl" required>
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Unit" [(ngModel)]="newParameter.unit" name="unit" required>
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Add Parameter</button>
-          </div>
-        </div>
-      </form>
-    </div>
-   
-    <button type="button" class="btn btn-primary" (click)="submitAnalytes()">Submit</button>
+  <div class="main-title">
+    <h2>Ajouter Paramater</h2>
+    <p class="required-note"><span>*</span>: required</p>
   </div>
-  
+
+  <div class="add-parameter-form">
+    <form (ngSubmit)="submit()">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newParameter.name" name="name" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="RDL" [(ngModel)]="newParameter.rdl" name="rdl" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Unit" [(ngModel)]="newParameter.unit" name="unit" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Ajouter Paramater</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

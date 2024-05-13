@@ -10,6 +10,7 @@ export interface Role {
     lastName: string;
     username: string;
     email: string;
+    phoneNumber:string;
     password: string;
     genre: string;
     active: boolean;

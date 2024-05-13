@@ -69,4 +69,17 @@ export class ParameterService {
         throw error;
       });
   }
+  updateParameterAvailability(id: number, availability: boolean): Promise<Parameter> {
+    console.log(id);
+    const url = `${this.apiUrl}/${id}/availability`;
+    const params = { availability: availability }; // Convert boolean to string
+    return axios.put<Parameter>(url, {}, {
+      headers: this.getAuthHeaders(),
+      params: params // Attach availability as query parameter
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error updating parameter availability', error);
+        throw error;
+      });
+  }  
 }

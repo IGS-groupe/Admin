@@ -20,6 +20,7 @@ export class AddEmployeComponent {
     email: '',
     password: '',
     genre: '',
+    phoneNumber:'',
     active: true  // Ensure 'active' is included from the start
   };
   constructor(private router: Router,private authService: UserService) { }
@@ -28,7 +29,7 @@ export class AddEmployeComponent {
     this.authService.registerAdmin(this.formData).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/Employess']);
         // Handle further actions like redirecting the user or displaying success message
       },
       error: (error) => {

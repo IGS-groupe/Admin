@@ -1,46 +1,54 @@
 <div class="app-container">
-  <div style="position: absolute; top: 0; right: 0;">
-    <!-- This will be replaced by your Angular component for toasts -->
-  </div>
   <div class="card-container">
     <div class="card-body">
       <h4>Add Employee</h4>
       <form (ngSubmit)="registerAdmin()">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="First Name" name="firstName" [(ngModel)]="formData.firstName" required>
-              <span class="input-group-text">Last Name</span>
-              <input type="text" class="form-control" placeholder="Last Name" name="lastName" [(ngModel)]="formData.lastName" required>
-            </div>
+        <!-- Row for First and Last Name -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="firstName">Nome </label>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName" [(ngModel)]="formData.firstName" required>
           </div>
-          <div class="col-md-6">
-            <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="formData.email" required>
+          <div class="form-group col-md-6">
+            <label for="lastName">Prenom </label>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" [(ngModel)]="formData.lastName" required>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="formData.password" required>
-              
-            </div>
+        
+        <!-- Row for Email and Phone Number -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="formData.email" required>
           </div>
-          
-          <div class="col-md-6">
-            <select class="form-control" name="gender" [(ngModel)]="formData.genre" required>
-              <option value="" disabled selected>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+          <div class="form-group col-md-6">
+            <label for="phoneNumber">Numero de Telephone</label>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" name="phoneNumber" [(ngModel)]="formData.phoneNumber" required>
+          </div>
+        </div>
+        <!-- Row for Password and Gender -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" placeholder="Create a password" name="password" [(ngModel)]="formData.password" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="gender">Genre</label>
+            <select class="form-control" id="gender" name="gender" [(ngModel)]="formData.genre" required>
+              <option value="" disabled selected>Sélectionnez le sexe</option>
+              <option value="male">homme</option>
+              <option value="female">Femelle</option>
+              <option value="other">Autre</option>
             </select>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Employe Name" name="employename" [(ngModel)]="formData.username" required>
+        <div class="form-row">
+          <div class="form-group col-md">
+            <label for="firstName">Nome d'utilisatur </label>
+            <input type="text" class="form-control" id="username" placeholder="Enter first name" name="username" [(ngModel)]="formData.username" required>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 20px; background-color: red; color: white;">Add Employee</button>
+        <button type="submit" class="btn btn-primary submit-btn">Ajouter un administrateur</button>
       </form>
     </div>
   </div>

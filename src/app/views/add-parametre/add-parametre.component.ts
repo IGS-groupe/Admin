@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 })
 export class AddParametreComponent implements OnInit {
 
-  newParameter = { name: '', rdl: 0, unit: '' };
+  newParameter = { name: '', rdl: 0, unit: '' , available:true };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -32,18 +32,18 @@ export class AddParametreComponent implements OnInit {
 
 
   addParameter(): void {
+   
+  }
+
+  
+  submit(): void {
     if (this.newParameter.name && this.newParameter.rdl && this.newParameter.unit) {
       this.parameterService.saveParameter(this.newParameter).then(parameter => {
-        this.newParameter = { name: '', rdl: 0, unit: '' }; 
+        this.newParameter = { name: '', rdl: 0, unit: '',available:true }; 
         this.router.navigate(['/ListParamater']);// Reset the form fields
       }).catch(error => {
         console.error('Failed to save parameter:', error);
       });
     }
-  }
-
-  
-  submitAnalytes(): void {
-   
-  }
+  } 
 }

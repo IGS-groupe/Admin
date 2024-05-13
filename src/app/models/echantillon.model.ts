@@ -1,12 +1,16 @@
 export interface Echantillon {
     echantillonId: number;
-    gabarit: string;
+    gabarit: string; 
     typeEchantillon: string;
-    normeEchantillon: string;
     nomEchantillon: string;
     lieuPrelevement: string;
-    dateFinPrelevement: string;
-    heureFinPrelevement: string;
-    priorite: string;
+    addressRetourner: string; 
+    dateFinPrelevement: string; 
+    heureFinPrelevement: string; 
+    priorite: string; 
     commentairesInternes: string;
+    demandeId: number;
+    parameterIds?: number[]; 
+    disposes: string; 
+    returns: string; 
   }

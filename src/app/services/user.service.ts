@@ -48,11 +48,17 @@ export class UserService {
       });
   }
   registerAdmin(signUpData: User): Observable<any> {
-    return from(axios.post(`${this.apiUrl}/auth/signupAdmin`, signUpData, {
+    const token = localStorage.getItem('token');
+    return from(axios.post(`${this.apiUrl}/users/signupAdmin`, signUpData, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`
       }
-    }).then(response => response.data));
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error disabling user account', error);
+        throw error;
+      })
+    );
   }
   disableUser(userId: number): Promise<any> {
     const token = localStorage.getItem('token');

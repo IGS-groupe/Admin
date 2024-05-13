@@ -4,11 +4,13 @@
       <tr>
         <th>Numéro d'échantillon</th>
         <th>Nom de l'échantillon</th>
+        <th>Retour</th>
+        <th>Disposer</th>
         <th>Type d'échantillon</th>
         <th>Lieu de prélèvement</th>
-        <th>Type de prélèvement</th>
+        <th>Adresse de retour</th>
+        <th>priorite</th>
         <th>Date de début de prélèvement</th>
-        <th>Statut</th>
         <th>Détails</th>
       </tr>
     </thead>
@@ -16,25 +18,23 @@
       <tr *ngFor="let echantillon of echantillons">
         <td>{{ echantillon.echantillonId }}</td>
         <td>{{ echantillon.nomEchantillon }}</td>
+        <td>{{ echantillon.returns }}</td>
+        <td>{{ echantillon.disposes }}</td>
         <td>{{ echantillon.typeEchantillon }}</td>
         <td>{{ echantillon.lieuPrelevement }}</td>
-        <td>{{ echantillon.typeEchantillon }}</td>
+        <td>{{ echantillon.addressRetourner }}</td>
+        <td>{{ echantillon.priorite }}</td>
         <td>{{ echantillon.dateFinPrelevement }}</td>
         <td><button class="details-button">Détails</button></td>
       </tr>
     </tbody>
-  </table>
+  </table>  
 </div>
 <div class="status-controls">
   <select [(ngModel)]="selectedStatut" class="status-select">
-    <option value="Demande en attente">✔️ - Demande d'analyse transmise et en attente d'acceptation</option>
-    <option value="Resultats partiels">💧 - Résultats partiels</option>
-    <option value="Echantillon rejeté">❌ - Échantillon rejeté</option>
-    <option value="Depassement de norme">❗ - Dépassement de norme</option>
-    <option value="En cours d`analyse">📦 - Reçu au laboratoire, en cours d'analyse</option>
-    <option value="Resultats complets">✔️ - Résultats complets</option>
-    <option value="Non-Potable">‼️ - Non-Potable</option>
+    <option *ngFor="let status of statusOptions" [ngValue]="status.value">{{ status.label }}</option>
   </select>
-  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut)">Modifier etat</button>
+  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Modifier etat</button>
 </div>
+
 
