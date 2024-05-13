@@ -1,13 +1,15 @@
 <div class="client-table-container">
   <div class="table-header">
-      <button (click)="navigateToDashboard()">Add Admin</button>
+      <button (click)="navigateToDashboard()">Ajouter un administrateur</button>
   </div>
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>admin Name</th>
-        <th>Contact Email</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Numéro de téléphone</th>
+        <th>Email</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -15,9 +17,11 @@
       <tr *ngFor="let admin of Admins">
         <td>{{ admin.id }}</td>
         <td>{{ admin.firstName }}</td>
+        <td>{{ admin.lastName }}</td>
+        <td>{{ admin.phoneNumber }}</td>
         <td>{{ admin.email }}</td>
         <td>
-          <button (click)="deleteAdmin(admin.id)">Delete</button>
+          <button (click)="deleteAdmin(admin.id)">Supprimer</button>
         </td>
       </tr>
     </tbody>

@@ -6,6 +6,7 @@ import { EchantillonService } from 'src/app/services/echantillon.service';
 import { DemandeService } from 'src/app/services/demande.service';
 import { Echantillon } from 'src/app/models/echantillon.model';
 import { AnalysisStatus } from 'src/app/models/AnalysisStatus.enum'; // Import AnalysisStatus enum
+import { Parameter } from 'src/app/models/parameter.model';
 
 @Component({
   selector: 'app-list-echantillon',
@@ -52,10 +53,30 @@ export class ListEchantillonComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
+  toggleDetail(echantillon: Echantillon): void {
+    if (!echantillon.showDetails) {
+      this.echantillonService.getParametersByEchantillonId(echantillon.echantillonId).then((parameters: Parameter[]) => {
+        echantillon.parameters = parameters;
+        echantillon.showDetails = true;
+      }).catch(error => {
+        echantillon.parameters = [];
+        console.error('Failed to fetch parameters', error);
+      });
+    } else {
+      echantillon.showDetails = false;
+    }
+  }
+  
 
   updateAllDemandeStatuses(newStatut: AnalysisStatus) {
+    const statutKey = Object.keys(AnalysisStatus).find(key => AnalysisStatus[key as keyof typeof AnalysisStatus] === newStatut);
+    if (!statutKey) {
+      console.error('Invalid status');
+      return;
+    }
+    console.log('Updating status with key:', statutKey);
     this.echantillons.forEach(echantillon => {
-      this.demandeService.updateState(this.demandeId, newStatut).then(() => {
+      this.demandeService.updateState(this.demandeId, statutKey).then(() => {
         this.router.navigate(['/Listdemandes']);
         console.log('Statut mis à jour avec succès');
       }).catch(error => {

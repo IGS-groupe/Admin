@@ -9,24 +9,47 @@
         <th>Type d'échantillon</th>
         <th>Lieu de prélèvement</th>
         <th>Adresse de retour</th>
-        <th>priorite</th>
+        <th>Priorité</th>
         <th>Date de début de prélèvement</th>
         <th>Détails</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let echantillon of echantillons">
-        <td>{{ echantillon.echantillonId }}</td>
-        <td>{{ echantillon.nomEchantillon }}</td>
-        <td>{{ echantillon.returns }}</td>
-        <td>{{ echantillon.disposes }}</td>
-        <td>{{ echantillon.typeEchantillon }}</td>
-        <td>{{ echantillon.lieuPrelevement }}</td>
-        <td>{{ echantillon.addressRetourner }}</td>
-        <td>{{ echantillon.priorite }}</td>
-        <td>{{ echantillon.dateFinPrelevement }}</td>
-        <td><button class="details-button">Détails</button></td>
-      </tr>
+      <ng-container *ngFor="let echantillon of echantillons">
+        <tr>
+          <td>{{ echantillon.echantillonId }}</td>
+          <td>{{ echantillon.nomEchantillon }}</td>
+          <td>{{ echantillon.returns }}</td>
+          <td>{{ echantillon.disposes }}</td>
+          <td>{{ echantillon.typeEchantillon }}</td>
+          <td>{{ echantillon.lieuPrelevement }}</td>
+          <td>{{ echantillon.addressRetourner }}</td>
+          <td>{{ echantillon.priorite }}</td>
+          <td>{{ echantillon.dateFinPrelevement }}</td>
+          <td>
+            <button (click)="toggleDetail(echantillon)">Details</button>
+          </td>
+        </tr>
+        <tr *ngIf="echantillon.showDetails">
+          <td colspan="10">
+            <div>
+              <h4>List of Parameters</h4>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>RDL</th>
+                  <th>Unit</th>
+                </tr>
+                <tr *ngFor="let param of echantillon.parameters">
+                  <td>{{ param.name }}</td>
+                  <td>{{ param.rdl }}</td>
+                  <td>{{ param.unit }}</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>  
 </div>
@@ -34,7 +57,5 @@
   <select [(ngModel)]="selectedStatut" class="status-select">
     <option *ngFor="let status of statusOptions" [ngValue]="status.value">{{ status.label }}</option>
   </select>
-  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Modifier etat</button>
+  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Modifier état</button>
 </div>
-
-
