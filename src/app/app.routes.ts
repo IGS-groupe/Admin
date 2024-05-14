@@ -47,6 +47,10 @@ export const routes: Routes = [
         path: 'add_parametre',
         loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
       },
+      {
+        path: 'messages',
+        loadComponent: () => import('./views/messages/messages.component').then((m) => m.MessagesComponent)
+      },
       // {
       //   path: 'theme',
       //   loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

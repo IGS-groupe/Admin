@@ -1,0 +1,17 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-3">Messages</h2> <!-- Title added here -->
+            <div class="list-group">
+                <!-- Dynamically generated message item -->
+                <a *ngFor="let contact of contacts" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ contact.name }}</h5>
+                        <small>3 mins ago</small> <!-- Placeholder for a real timestamp -->
+                    </div>
+                    <p class="mb-1">{{ contact.issueDescription }}</p> <!-- Assuming 'issueDescription' is a property of Contact -->
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

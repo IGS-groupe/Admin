@@ -32,6 +32,11 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-notes' } // Change 'cil-wallet' to whatever icon you prefer
   },
   {
+    name: 'Messages',
+    url: '/messages',
+    iconComponent: { name: 'cil-envelope-open' }
+  },
+  {
     name: 'Lougout',
     url: 'login', // This should match the route you defined in your Angular router
     iconComponent: { name: 'cilAccountLogout' } // Change 'cil-wallet' to whatever icon you prefer
