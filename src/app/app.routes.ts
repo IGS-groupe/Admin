@@ -28,9 +28,14 @@ export const routes: Routes = [
         loadComponent: () => import('./views/list-employee/list-employee.component').then(m => m.ListEmployeeComponent),
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./views/update-profile/update-profile.component').then(m => m.UpdateProfileComponent),
+      },
+      {
         path: 'client-table',
         loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
       },
+
       {
         path: 'Listdemandes',
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)

@@ -11,7 +11,13 @@ export class UserService {
   private apiUrl = 'http://localhost:4000/api'; // Adjust this to your API URL
 
   constructor() {}
-
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
   getClient(): Promise<User[]> {
     const token = localStorage.getItem('token');
     console.log(token); // Retrieve the token from localStorage
@@ -85,6 +91,35 @@ export class UserService {
       return false;
     });
   }
+
+  getUserById(id: number): Observable<User> {
+    return from(axios.get<User>(`${this.apiUrl}/users/${id}`, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
+  // Get users by role using Axios
+  getUsersByRole(role: string): Observable<User[]> {
+    return from(axios.get<User[]>(`${this.apiUrl}/users/role/${role}`, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
+  // Create new user using Axios
+  createUser(user: User): Observable<User> {
+    return from(axios.post<User>(`${this.apiUrl}/users`, user, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
+  // Update user using Axios
+  updateUser(id: number, user: User): Observable<User> {
+    return from(axios.put<User>(`${this.apiUrl}/users/${id}`, user, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
+  // Delete user using Axios
   deleteUser(userId: number): Promise<any> {
     const token = localStorage.getItem('token');
     return axios.delete(`${this.apiUrl}/users/${userId}`, {
@@ -97,4 +132,24 @@ export class UserService {
         throw error;
       });
   }
+
+  // Disable user using Axios
+  toggleUserActive(id: number): Observable<string> {
+    return from(axios.put<string>(`${this.apiUrl}/users/disable/${id}`, null, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
+  // Change user password using Axios
+  changePassword(usernameOrEmail: string, password: string, newPassword: string): Observable<any> {
+    const body = {
+      usernameOrEmail,
+      password,
+      newPassword
+    };
+    return from(axios.put<any>(`${this.apiUrl}/users/change-password`, body, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data));
+  }
+
 }

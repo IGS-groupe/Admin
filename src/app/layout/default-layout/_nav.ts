@@ -15,6 +15,11 @@ export const navItems: INavData[] = [
     name: 'Admin',
     url: '/Employess',
     linkProps: { fragment: 'headings' },
+    iconComponent: { name: 'cil-people' }
+  },
+  {
+    name: 'Profile',
+    url: '/profile',
     iconComponent: { name: 'cil-user' }
   },
   {
