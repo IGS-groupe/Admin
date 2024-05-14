@@ -4,13 +4,21 @@
             <h2 class="mb-3">Messages</h2> <!-- Title added here -->
             <div class="list-group">
                 <!-- Dynamically generated message item -->
-                <a *ngFor="let contact of contacts" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ contact.name }}</h5>
-                        <small>3 mins ago</small> <!-- Placeholder for a real timestamp -->
+                <div *ngFor="let contact of contacts" class="list-group-item list-group-item-action flex-column align-items-start p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="mb-0">Depuis: {{ contact.name }}</h5>
+                        <small>{{ contact.dateOfComplaint | date: 'mediumDate' }}</small> <!-- Formatted date -->
                     </div>
-                    <p class="mb-1">{{ contact.issueDescription }}</p> <!-- Assuming 'issueDescription' is a property of Contact -->
-                </a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="mb-1">Email: {{ contact.email }}</p>
+                            <p class="mb-1">Contact: {{ contact.contactPerson }}</p>
+                            <p class="mb-1">Entreprise: {{ contact.company }}</p>
+                        </div>
+                        <!-- <p class="mb-0 text-primary">Status: {{ contact.status }}</p> Example additional field -->
+                    </div>
+                    <p class="mt-2">{{ contact.issueDescription }}</p>
+                </div>
             </div>
         </div>
     </div>
