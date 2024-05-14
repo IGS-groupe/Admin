@@ -19,9 +19,9 @@
         <tr>
           <td>{{ echantillon.echantillonId }}</td>
           <td>{{ echantillon.nomEchantillon }}</td>
-          <td>{{ echantillon.returns }}</td>
-          <td>{{ echantillon.disposes }}</td>
-          <td>{{ echantillon.typeEchantillon }}</td>
+          <td>{{ getEnumDescription(Return, echantillon.returns) }}</td>
+          <td>{{ getEnumDescription(Dispose, echantillon.disposes) }}</td>
+          <td>{{ getEnumDescription(TypeEchantillon, echantillon.typeEchantillon) }}</td>
           <td>{{ echantillon.lieuPrelevement }}</td>
           <td>{{ echantillon.addressRetourner }}</td>
           <td>{{ echantillon.priorite }}</td>

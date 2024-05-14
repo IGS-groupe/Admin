@@ -7,7 +7,9 @@ import { DemandeService } from 'src/app/services/demande.service';
 import { Echantillon } from 'src/app/models/echantillon.model';
 import { AnalysisStatus } from 'src/app/models/AnalysisStatus.enum'; // Import AnalysisStatus enum
 import { Parameter } from 'src/app/models/parameter.model';
-
+import { Dispose}from  'src/app/models/Dispose.enum';
+import { Return } from 'src/app/models/Return.enum';
+import { TypeEchantillon } from 'src/app/models/typeEchantillon.enum';
 @Component({
   selector: 'app-list-echantillon',
   standalone: true,
@@ -20,6 +22,9 @@ export class ListEchantillonComponent implements OnInit {
   demandeId: number = 0;
   selectedStatut: AnalysisStatus | null = null;  // To hold the status selected from the dropdown
   etat: string = "";
+  Dispose = Dispose;
+  Return = Return;
+  TypeEchantillon= TypeEchantillon;
   statusOptions = [
     { label: AnalysisStatus.REQUEST_SUBMITTED, value: AnalysisStatus.REQUEST_SUBMITTED },
     { label: AnalysisStatus.PARTIAL_RESULTS, value: AnalysisStatus.PARTIAL_RESULTS },
@@ -52,6 +57,9 @@ export class ListEchantillonComponent implements OnInit {
       console.error('Failed to load echantillons:', error);
       this.router.navigate(['/login']);
     });
+  }
+  getEnumDescription(enumObj: any, key: string): string {
+    return enumObj[key];
   }
   toggleDetail(echantillon: Echantillon): void {
     if (!echantillon.showDetails) {
