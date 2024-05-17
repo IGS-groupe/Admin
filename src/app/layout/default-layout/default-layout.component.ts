@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 import { IconDirective } from '@coreui/icons-angular';
@@ -53,7 +53,7 @@ export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
   public isAdmin = false;
 
-  constructor(private authService: UserService) {
+  constructor(private authService: UserService, private router: Router) {
     this.checkAdminStatus();
   }
 
@@ -69,7 +69,15 @@ export class DefaultLayoutComponent implements OnInit {
       console.log(this.isAdmin);
     }
   }
-
+  logout() {
+    this.authService.logout().then(() => {
+      localStorage.removeItem('token'); 
+      this.router.navigate(['/login']); 
+    }).catch(error => {
+      console.error('Logout failed:', error);
+      // Potentially handle errors with user-friendly messages
+    });
+  }
   onScrollbarUpdate($event: any): void {
     // Additional scrollbar update logic can be placed here.
   }

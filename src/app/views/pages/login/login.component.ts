@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
         .then(response => {
           const roles = response.roles;  // Correctly access roles
           if(!roles.includes("ROLE_USER")){
+            console.log(response.token);
             localStorage.setItem('AdminId', response.userId.toString());
             localStorage.setItem('token', response.token);
             this.router.navigate(['/Listdemandes']);

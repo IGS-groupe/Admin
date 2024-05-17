@@ -151,5 +151,16 @@ export class UserService {
       headers: this.getAuthHeaders()
     }).then(response => response.data));
   }
+  logout(): Promise<any> {
+    return axios.post<any>(`${this.apiUrl}/auth/logout`, {}, {
+      headers: this.getAuthHeaders()
+    }).then(response => {
+      localStorage.removeItem('token');  // Client-side cleanup
+      return response.data;
+    }).catch(error => {
+      console.error('Error during logout', error);
+      throw error;
+    });
+  }
 
 }
