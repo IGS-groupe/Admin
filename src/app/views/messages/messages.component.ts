@@ -14,7 +14,7 @@ export class MessagesComponent implements OnInit {
   contacts: Contact[] = [];
 
   constructor(private contactService: ContactService,private router: Router) {
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('AdminId'); 
     if(!userId){
       this.router.navigate(['/account/login']);
     }

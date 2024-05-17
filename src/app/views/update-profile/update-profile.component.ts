@@ -2,51 +2,58 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
-// import { ToastrService } from 'ngx-toastr';  // Adjust import according to actual service used
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.scss']
 })
 export class UpdateProfileComponent implements OnInit {
-  profileForm: FormGroup = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    phoneNumber: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-  });
+  profileForm: FormGroup;
+  passwordForm: FormGroup;
+  userId: number;
+  generalError: string = '';
+  profileError: string = '';
+  passwordError: string = '';
 
-  passwordForm: FormGroup = this.fb.group({
-    password: ['', Validators.required],
-    newPassword: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', Validators.required]
-  }, { validator: this.checkPasswords });
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    this.userId = Number(localStorage.getItem('AdminId'));
+    this.profileForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    });
 
-  userId: number = Number(localStorage.getItem('userId'));
+    this.passwordForm = this.fb.group({
+      password: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required]
+    }, { validator: this.checkPasswords });
 
-  constructor(private fb: FormBuilder, private userService: UserService, 
-    // private toastr: ToastrService
-  ) {}
+    this.checkAuthentication();
+  }
 
   ngOnInit(): void {
     if (this.userId) {
       this.userService.getUserById(this.userId).subscribe({
-        next: (user: User) => {
-          this.profileForm.patchValue(user);
-        },
-        error: (err) => {
-          console.error('Failed to fetch user:', err);
-          // this.toastr.error('Failed to fetch user details.');
-        }
+        next: (user: User) => this.profileForm.patchValue(user),
+        error: (err) => this.generalError = 'Failed to fetch user details.'
       });
     }
   }
 
-  checkPasswords(group: FormGroup) {
+  checkAuthentication() {
+    if (!this.userId) {
+      // Redirect to login or show an error
+    }
+  }
+
+  checkPasswords(group: FormGroup): { [key: string]: any } | null {
     const pass = group.get('newPassword')?.value;
     const confirmPass = group.get('confirmPassword')?.value;
     return pass === confirmPass ? null : { notSame: true };
@@ -55,14 +62,11 @@ export class UpdateProfileComponent implements OnInit {
   onSubmit() {
     if (this.profileForm.valid) {
       this.userService.updateUser(this.userId, this.profileForm.value).subscribe({
-        next: () => {
-          // this.toastr.success('Profile updated successfully');
-        },
-        error: (error) => {
-          console.error('Failed to update profile:', error);
-          // this.toastr.error('Failed to update profile.');
-        }
+        next: () => this.profileError = '',
+        error: (error) => this.profileError = 'Failed to update profile.'
       });
+    } else {
+      this.profileError = 'Please fill all required fields.';
     }
   }
 
@@ -70,21 +74,11 @@ export class UpdateProfileComponent implements OnInit {
     if (this.passwordForm.valid) {
       const { password, newPassword } = this.passwordForm.value;
       this.userService.changePassword(this.profileForm.value.email, password, newPassword).subscribe({
-        next: (response) => {
-          if (response.message === "Password updated successfully.") {
-            // this.toastr.success(response.message);
-            this.passwordForm.reset();
-          } else {
-            // this.toastr.error(response.message || 'Unknown error occurred.');
-          }
-        },
-        error: (error) => {
-          console.error('Failed to update password:', error);
-          // this.toastr.error('Failed to update password.');
-        }
+        next: () => this.passwordError = '',
+        error: (error) => this.passwordError = 'Failed to update password.'
       });
     } else {
-      // this.toastr.error('Please fill all required fields.');
+      this.passwordError = 'Please fill all required fields.';
     }
   }
 }

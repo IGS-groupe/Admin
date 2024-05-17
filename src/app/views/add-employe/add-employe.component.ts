@@ -26,7 +26,7 @@ export class AddEmployeComponent {
   constructor(private router: Router,private authService: UserService,
     // private toastr: ToastrService
   ) { 
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('AdminId'); 
     if(!userId){
       this.router.navigate(['/account/login']);
     }

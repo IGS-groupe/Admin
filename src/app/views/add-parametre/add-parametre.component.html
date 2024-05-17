@@ -2,6 +2,8 @@
   <div class="main-title">
     <h2>Add Parameter</h2>
     <p class="required-note"><span>*</span>: required</p>
+    <!-- Error message display -->
+    <p *ngIf="error" class="alert alert-danger">{{ error }}</p>
   </div>
 
   <div class="add-parameter-form">
@@ -22,5 +24,4 @@
       </div>
     </form>
   </div>
-
 </div>

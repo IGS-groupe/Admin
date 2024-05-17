@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class DemandelistComponent implements OnInit {
   demandes: Demande[] = [];
   constructor(private demandeService: DemandeService,private router: Router) {
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('AdminId'); 
     if(!userId){
       this.router.navigate(['/account/login']);
     }}

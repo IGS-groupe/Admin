@@ -22,13 +22,13 @@ import { Router } from '@angular/router';
 export class AddParametreComponent implements OnInit {
 
   newParameter = { name: '', rdl: 0, unit: '' , available:true };
-
+  error: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private parameterService: ParameterService, private router: Router,
     // private toastr: ToastrService
   ) { 
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('AdminId'); 
     if(!userId){
       this.router.navigate(['/account/login']);
     }
@@ -49,27 +49,14 @@ export class AddParametreComponent implements OnInit {
       this.parameterService.saveParameter(this.newParameter).then(() => {
         console.log('Parameter saved successfully');
         this.newParameter = { name: '', rdl: 0, unit: '', available: true };
-        // this.toastr.success('Parameter saved successfully!', 'Success', {
-        //   positionClass: 'toast-top-center',
-        //   timeOut: 3000,
-        //   closeButton: true
-        // });
         this.router.navigate(['/ListParamater']);
       }).catch(error => {
         console.error('Failed to save parameter:', error);
-        // this.toastr.error('', 'Failed to save parameter:', {
-        //   positionClass: 'toast-top-center',
-        //   timeOut: 3000,
-        //   closeButton: true
-        // });
+        this.error = `Failed to save parameter: ${error}`;
       });
     } else {
       console.error('Validation failed: All fields are required');
-      // this.toastr.error('Please check the form for errors.', 'Invalid Form', {
-      //   positionClass: 'toast-top-center',
-      //   timeOut: 3000,
-      //   closeButton: true
-      // });
+      this.error = 'Validation failed: All fields are required';
     }
   }
 }

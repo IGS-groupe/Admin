@@ -15,7 +15,7 @@ export class ClientTableComponent  implements OnInit {
   clients: User[] = [];
 
   constructor(private userService: UserService,private router: Router) { 
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('AdminId'); 
     if(!userId){
       this.router.navigate(['/account/login']);
     }

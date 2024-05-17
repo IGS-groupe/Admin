@@ -7,6 +7,8 @@
             <c-card-body>
               <form [formGroup]="loginForm" cForm>
                 <h1>Login</h1>
+                <!-- Display the error message if 'error' is not an empty string -->
+                <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
                 <p class="text-body-secondary">Sign In to your account</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
