@@ -49,7 +49,7 @@ export class AddParametreComponent implements OnInit {
         //   timeOut: 3000,
         //   closeButton: true
         // });
-        this.router.navigate(['/ListParameter']);
+        this.router.navigate(['/ListParamater']);
       }).catch(error => {
         console.error('Failed to save parameter:', error);
         // this.toastr.error('', 'Failed to save parameter:', {
