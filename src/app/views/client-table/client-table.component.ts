@@ -14,7 +14,12 @@ import { Router } from '@angular/router';
 export class ClientTableComponent  implements OnInit {
   clients: User[] = [];
 
-  constructor(private userService: UserService,private router: Router) { }
+  constructor(private userService: UserService,private router: Router) { 
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+  }
 
   ngOnInit() {
     this.fetchUsers();

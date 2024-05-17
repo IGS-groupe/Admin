@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Contact} from 'src/app/models/contact.model'; // Adjust the import path as needed
 import { ContactService } from 'src/app/services/contact.service'; // Adjust the import path as needed
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-messages',
   standalone: true,
@@ -12,7 +13,12 @@ import { ContactService } from 'src/app/services/contact.service'; // Adjust the
 export class MessagesComponent implements OnInit {
   contacts: Contact[] = [];
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService,private router: Router) {
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+  }
 
   ngOnInit() {
     this.loadContacts();

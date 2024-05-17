@@ -27,7 +27,12 @@ export class AddParametreComponent implements OnInit {
 
   constructor(private parameterService: ParameterService, private router: Router,
     // private toastr: ToastrService
-  ) { }
+  ) { 
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+  }
 
   ngOnInit() {
   

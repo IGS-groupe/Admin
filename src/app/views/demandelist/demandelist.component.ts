@@ -13,7 +13,11 @@ import { Router } from '@angular/router';
 })
 export class DemandelistComponent implements OnInit {
   demandes: Demande[] = [];
-  constructor(private demandeService: DemandeService,private router: Router) {}
+  constructor(private demandeService: DemandeService,private router: Router) {
+    const userId = localStorage.getItem('userId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }}
 
   ngOnInit(): void {
     this.demandeService.getDemandes().then(demandes => {
