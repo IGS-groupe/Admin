@@ -5,12 +5,13 @@ import { IconDirective } from '@coreui/icons-angular';
 import { 
   ContainerComponent, RowComponent, ColComponent, CardGroupComponent, 
   TextColorDirective, CardComponent, CardBodyComponent, FormDirective, 
-  InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective 
+  InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, 
 } from '@coreui/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; // Add this import
+import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-
+; // Required for using Observables
+declare var $: any;
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -20,8 +21,7 @@ import { UserService } from 'src/app/services/user.service';
       ContainerComponent, RowComponent, ColComponent, CardGroupComponent, 
       TextColorDirective, CardComponent, CardBodyComponent, FormDirective, 
       InputGroupComponent, InputGroupTextDirective, IconDirective, 
-      FormControlDirective, ButtonDirective, NgStyle,ReactiveFormsModule,
-      
+      FormControlDirective, ButtonDirective, NgStyle, ReactiveFormsModule, 
     ]
 })
 export class LoginComponent {
@@ -52,9 +52,13 @@ export class LoginComponent {
 
     this.userService.login(loginData)
       .then(response => {
-        localStorage.setItem('userId', response.userId.toString());
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/Listdemandes']);
+        const roles = response.roles;  // Correctly access roles
+        if(!roles.includes("ROLE_USER")){
+          localStorage.setItem('userId', response.userId.toString());
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/Listdemandes']);
+        }else{
+        }
       })
       .catch(error => {
         console.error('API Error:', error);
