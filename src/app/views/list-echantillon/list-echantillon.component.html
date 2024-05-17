@@ -2,16 +2,16 @@
   <table>
     <thead>
       <tr>
-        <th>Numéro d'échantillon</th>
-        <th>Nom de l'échantillon</th>
-        <th>Retour</th>
-        <th>Disposer</th>
-        <th>Type d'échantillon</th>
-        <th>Lieu de prélèvement</th>
-        <th>Adresse de retour</th>
-        <th>Priorité</th>
-        <th>Date de début de prélèvement</th>
-        <th>Détails</th>
+        <th>Sample number</th>
+        <th>Sample Name</th>
+        <th>Back</th>
+        <th>Arrange</th>
+        <th>Sample type</th>
+        <th>Collection location</th>
+        <th>Return address</th>
+        <th>Priority</th>
+        <th>Collection start date</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody>
@@ -57,5 +57,5 @@
   <select [(ngModel)]="selectedStatut" class="status-select">
     <option *ngFor="let status of statusOptions" [ngValue]="status.value">{{ status.label }}</option>
   </select>
-  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Modifier état</button>
+  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Change state</button>
 </div>
