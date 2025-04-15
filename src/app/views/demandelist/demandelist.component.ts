@@ -13,20 +13,11 @@ import { Router } from '@angular/router';
 })
 export class DemandelistComponent implements OnInit {
   demandes: Demande[] = [];
-  // demandes = [
-  //   {
-  //     DemandeID: 1,
-  //     DemandePour: 'Client A',
-  //     EnvoyeAuLaboratoire: 'Lab X',
-  //     CourrielsSupplementaires: 'clienta@example.com',
-  //     BonDeCommande: '1234',
-  //     UnEchantillon: true,
-  //     LangueDuCertificat: 'francais',
-  //     CommentairesInternes: 'Initial review completed'
-  //   },
-  //   // More fake demandes can be added here
-  // ];
-  constructor(private demandeService: DemandeService,private router: Router) {}
+  constructor(private demandeService: DemandeService,private router: Router) {
+    const userId = localStorage.getItem('AdminId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }}
 
   ngOnInit(): void {
     this.demandeService.getDemandes().then(demandes => {

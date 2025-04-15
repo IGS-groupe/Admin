@@ -1,0 +1,18 @@
+.list-group-item:first-child {
+    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.list-group-item {
+    transition: transform 0.2s;
+}
+
+// .list-group-item:hover {
+//     transform: scale(1.02);
+//     background-color: #f8f9fa;
+// }

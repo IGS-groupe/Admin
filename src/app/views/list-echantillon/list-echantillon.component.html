@@ -2,31 +2,54 @@
   <table>
     <thead>
       <tr>
-        <th>Numéro d'échantillon</th>
-        <th>Nom de l'échantillon</th>
-        <th>Retour</th>
-        <th>Disposer</th>
-        <th>Type d'échantillon</th>
-        <th>Lieu de prélèvement</th>
-        <th>Adresse de retour</th>
-        <th>priorite</th>
-        <th>Date de début de prélèvement</th>
-        <th>Détails</th>
+        <th>Sample number</th>
+        <th>Sample Name</th>
+        <th>Back</th>
+        <th>Arrange</th>
+        <th>Sample type</th>
+        <th>Collection location</th>
+        <th>Return address</th>
+        <th>Priority</th>
+        <th>Collection start date</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let echantillon of echantillons">
-        <td>{{ echantillon.echantillonId }}</td>
-        <td>{{ echantillon.nomEchantillon }}</td>
-        <td>{{ echantillon.returns }}</td>
-        <td>{{ echantillon.disposes }}</td>
-        <td>{{ echantillon.typeEchantillon }}</td>
-        <td>{{ echantillon.lieuPrelevement }}</td>
-        <td>{{ echantillon.addressRetourner }}</td>
-        <td>{{ echantillon.priorite }}</td>
-        <td>{{ echantillon.dateFinPrelevement }}</td>
-        <td><button class="details-button">Détails</button></td>
-      </tr>
+      <ng-container *ngFor="let echantillon of echantillons">
+        <tr>
+          <td>{{ echantillon.echantillonId }}</td>
+          <td>{{ echantillon.nomEchantillon }}</td>
+          <td>{{ getEnumDescription(Return, echantillon.returns) }}</td>
+          <td>{{ getEnumDescription(Dispose, echantillon.disposes) }}</td>
+          <td>{{ getEnumDescription(TypeEchantillon, echantillon.typeEchantillon) }}</td>
+          <td>{{ echantillon.lieuPrelevement }}</td>
+          <td>{{ echantillon.addressRetourner }}</td>
+          <td>{{ echantillon.priorite }}</td>
+          <td>{{ echantillon.dateFinPrelevement }}</td>
+          <td>
+            <button (click)="toggleDetail(echantillon)">Details</button>
+          </td>
+        </tr>
+        <tr *ngIf="echantillon.showDetails">
+          <td colspan="10">
+            <div>
+              <h4>List of Parameters</h4>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>RDL</th>
+                  <th>Unit</th>
+                </tr>
+                <tr *ngFor="let param of echantillon.parameters">
+                  <td>{{ param.name }}</td>
+                  <td>{{ param.rdl }}</td>
+                  <td>{{ param.unit }}</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>  
 </div>
@@ -34,7 +57,5 @@
   <select [(ngModel)]="selectedStatut" class="status-select">
     <option *ngFor="let status of statusOptions" [ngValue]="status.value">{{ status.label }}</option>
   </select>
-  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Modifier etat</button>
+  <button class="update-button" (click)="updateAllDemandeStatuses(selectedStatut!)">Change state</button>
 </div>
-
-

@@ -29,9 +29,14 @@ export const routes: Routes = [
         loadComponent: () => import('./views/list-employee/list-employee.component').then(m => m.ListEmployeeComponent),
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./views/update-profile/update-profile.component').then(m => m.UpdateProfileComponent),
+      },
+      {
         path: 'client-table',
         loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
       },
+
       {
         path: 'Listdemandes',
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
@@ -49,9 +54,15 @@ export const routes: Routes = [
         loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
       },
       {
+<<<<<<< HEAD
            path: 'charts',
            loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
          },
+=======
+        path: 'messages',
+        loadComponent: () => import('./views/messages/messages.component').then((m) => m.MessagesComponent)
+      },
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
       // {
       //   path: 'theme',
       //   loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

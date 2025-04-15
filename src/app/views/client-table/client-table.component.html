@@ -1,4 +1,5 @@
 <div class="client-table-container">
+<<<<<<< HEAD
   <h2 class="table-title">Liste des Clients</h2>
 
   <div class="filter-bar d-flex flex-wrap gap-3 align-items-center mb-4">
@@ -70,5 +71,40 @@
         </button>
       </div>
     </div>
+=======
+  <!-- Check if clients array exists and has elements -->
+  <div *ngIf="clients && clients.length > 0; else noClients">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone number</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.id }}</td>
+          <td>{{ client.firstName }}</td>
+          <td>{{ client.lastName }}</td>
+          <td>{{ client.phoneNumber }}</td>
+          <td>{{ client.email }}</td>
+          <td>
+            <button (click)="disable(client.id)">{{ client.active ? 'Disable' : 'Enable' }}</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
   </div>
 </div>
+
+<!-- Template for when there are no clients -->
+<ng-template #noClients>
+  <div class="alert alert-warning" role="alert">
+    No customers found.
+  </div>
+</ng-template>

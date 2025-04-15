@@ -1,17 +1,17 @@
 <div class="app-container">
   <div class="card-container">
     <div class="card-body">
-      <h4>Add Employee</h4>
-      <form (ngSubmit)="registerAdmin()">
+      <h4>Add Admin</h4>
+      <form (ngSubmit)="handleSubmit()">
         <!-- Row for First and Last Name -->
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="firstName">Nome </label>
-            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName" [(ngModel)]="formData.firstName" required>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter Nom" name="firstName" [(ngModel)]="formData.firstName" required>
           </div>
           <div class="form-group col-md-6">
             <label for="lastName">Prenom </label>
-            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" [(ngModel)]="formData.lastName" required>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Prenom" name="lastName" [(ngModel)]="formData.lastName" required>
           </div>
         </div>
         
@@ -22,33 +22,33 @@
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="formData.email" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="phoneNumber">Numero de Telephone</label>
+            <label for="phoneNumber">Phone number</label>
             <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" name="phoneNumber" [(ngModel)]="formData.phoneNumber" required>
           </div>
         </div>
         <!-- Row for Password and Gender -->
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="password">Mot de passe</label>
+            <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Create a password" name="password" [(ngModel)]="formData.password" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="gender">Genre</label>
+            <label for="gender">Gender</label>
             <select class="form-control" id="gender" name="gender" [(ngModel)]="formData.genre" required>
-              <option value="" disabled selected>Sélectionnez le sexe</option>
-              <option value="male">homme</option>
-              <option value="female">Femelle</option>
-              <option value="other">Autre</option>
+              <option value="" disabled selected>Select gender</option>
+              <option value="male">man</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
             </select>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md">
-            <label for="firstName">Nome d'utilisatur </label>
-            <input type="text" class="form-control" id="username" placeholder="Enter first name" name="username" [(ngModel)]="formData.username" required>
+            <label for="firstName">username </label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" [(ngModel)]="formData.username" required>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary submit-btn">Ajouter un administrateur</button>
+        <button type="submit" class="btn btn-primary submit-btn">Add an administrator</button>
       </form>
     </div>
   </div>

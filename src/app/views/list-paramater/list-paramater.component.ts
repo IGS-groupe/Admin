@@ -49,10 +49,19 @@ export class ListParamaterComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+<<<<<<< HEAD
   constructor(
     private parameterService: ParameterService,
     private router: Router
   ) {}
+=======
+  constructor(private parameterService: ParameterService , private router: Router) {
+    const userId = localStorage.getItem('AdminId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+   }
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
 
   ngOnInit() {
     this.fetchParameters();

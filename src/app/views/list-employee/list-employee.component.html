@@ -1,4 +1,5 @@
 <div class="client-table-container">
+<<<<<<< HEAD
   <div class="table-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
     <button (click)="navigateToDashboard()">Ajouter Admin</button>
     <div class="d-flex flex-wrap gap-2">
@@ -22,6 +23,27 @@
       <tr>
         <th>ID</th>
         <th>Nom de l'admin</th>
+=======
+  <div class="table-header">
+    <button (click)="navigateToDashboard()" >Add an administrator</button>
+  </div>
+
+  <!-- Display a message if the Admins array is empty -->
+  <div *ngIf="Admins.length === 0" class="no-admins">
+    <div class="alert alert-warning" role="alert">
+      <p>No administrators found.</p>
+    </div>
+  </div>
+
+  <!-- Only display the table if there are entries in the Admins array -->
+  <table *ngIf="Admins.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone number</th>
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
         <th>Email</th>
         <th>Actions</th>
       </tr>
@@ -30,9 +52,15 @@
       <tr *ngFor="let admin of filteredAdmins()">
         <td>{{ admin.id }}</td>
         <td>{{ admin.firstName }}</td>
+        <td>{{ admin.lastName }}</td>
+        <td>{{ admin.phoneNumber }}</td>
         <td>{{ admin.email }}</td>
         <td>
+<<<<<<< HEAD
           <button (click)="deleteAdmin(admin.id)">Supprimer</button>
+=======
+          <button (click)="deleteAdmin(admin.id)">DELETE</button>
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
         </td>
       </tr>
     </tbody>

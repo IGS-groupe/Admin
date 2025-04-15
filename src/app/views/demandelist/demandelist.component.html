@@ -1,31 +1,38 @@
 <div class="demande-client-table">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Demande Pour</th>
-          <th>Envoyé Au Laboratoire</th>
-          <th>Courriels Supplémentaires</th>
-          <th>Bon De Commande</th>
-          <th>Langue Du Certificat</th>
-          <th>Commentaires Internes</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let demande of demandes; let i = index">
-            <td>{{ demande.demandeId }}</td>
-            <td>{{ demande.demandePour }}</td>
-            <td>{{ demande.envoyeAuLaboratoire }}</td>
-            <td>{{ demande.courrielsSupplementaires }}</td>
-            <td>{{ demande.bonDeCommande }}</td>
-            <td>{{ demande.langueDuCertificat }}</td>
-            <td>{{ demande.commentairesInternes }}</td>
-          <td>
-            <button class="accept-btn" (click)="details(demande.demandeId, demande.etat)">Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Check if the demandes array is empty -->
+  <div *ngIf="demandes.length === 0">
+    <div class="alert alert-warning" role="alert">
+      <p>Aucune demande trouvée.</p>
+    </div>
   </div>
-  
+
+  <!-- Display the table only if there are elements in the demandes array -->
+  <table *ngIf="demandes.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Request For</th>
+        <th>Sent To Laboratory</th>
+        <th>Additional Emails</th>
+        <th>Purchase order</th>
+        <th>Certificate Language</th>
+        <th>Internal Comments</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let demande of demandes; let i = index">
+        <td>{{ demande.demandeId }}</td>
+        <td>{{ demande.demandePour }}</td>
+        <td>{{ demande.envoyeAuLaboratoire }}</td>
+        <td>{{ demande.courrielsSupplementaires }}</td>
+        <td>{{ demande.bonDeCommande }}</td>
+        <td>{{ demande.langueDuCertificat }}</td>
+        <td>{{ demande.commentairesInternes }}</td>
+        <td>
+          <button class="accept-btn" (click)="details(demande.demandeId, demande.etat)">Details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

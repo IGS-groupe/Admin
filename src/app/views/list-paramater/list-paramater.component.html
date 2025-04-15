@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="param-card-container">
   <!-- Header Section -->
   <div class="param-card-header">
@@ -55,4 +56,42 @@
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"></mat-paginator>
+=======
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="accent" (click)="onAddButtonClick()">Add Parameter</button>
+  </div>
+  <br/>
+  <!-- Condition to check if the dataSource is empty -->
+  <div *ngIf="dataSource && dataSource.data && dataSource.data.length === 0" class="no-data-message">
+    <p>No settings found.</p>
+  </div>
+  
+  <!-- Table and paginator only displayed if dataSource has data -->
+  <div *ngIf="dataSource && dataSource.data && dataSource.data.length > 0">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Analyte </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="rdl">
+        <mat-header-cell *matHeaderCellDef> RDL </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rdl}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="unit">
+        <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="available">
+        <mat-header-cell *matHeaderCellDef> disponible</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox (change)="updateAvailability(element)" [checked]="element.available"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"></mat-paginator>
+  </div>
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
 </div>

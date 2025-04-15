@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Echantillon } from '../models/echantillon.model';
+import { Parameter } from '../models/parameter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,15 @@ export class EchantillonService {
         throw error;
       });
   }
-
+  getParametersByEchantillonId(echantillonId: number): Promise<Parameter[]> {
+    return axios.get<Parameter[]>(`${this.apiUrl}/${echantillonId}/parameters`, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error fetching parameters by echantillonId', error);
+        throw error;
+      });
+  }
   deleteEchantillon(id: number): Promise<void> {
     return axios.delete<void>(`${this.apiUrl}/${id}`, {
       headers: this.getAuthHeaders()

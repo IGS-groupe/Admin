@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-
+// import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-employe',
   standalone: true,
@@ -23,22 +23,53 @@ export class AddEmployeComponent {
     phoneNumber:'',
     active: true  // Ensure 'active' is included from the start
   };
-  constructor(private router: Router,private authService: UserService) { }
+  constructor(private router: Router,private authService: UserService,
+    // private toastr: ToastrService
+  ) { 
+    const userId = localStorage.getItem('AdminId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+  }
 
   registerAdmin(): void {
     this.authService.registerAdmin(this.formData).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
+        // this.toastr.success('Admin added successfully!', 'Success', {
+        //   positionClass: 'toast-top-center',
+        //   timeOut: 3000,
+        //   closeButton: true
+        // });
         this.router.navigate(['/Employess']);
         // Handle further actions like redirecting the user or displaying success message
       },
       error: (error) => {
-        console.error('Registration failed:', error);
-        // Handle errors, e.g., display an error message
+        // console.error('Registration failed:', error);
+        // this.toastr.error(error, 'Registration Failed', {
+        //   positionClass: 'toast-top-center',
+        //   timeOut: 3000,
+        //   closeButton: true
+        // });
       }
     });
   }
-  handleSubmit() {
-    console.log('Form submitted:', this.formData);
-  }
+  handleSubmit(): boolean {
+    if (!this.formData.firstName?.trim() || 
+        !this.formData.lastName?.trim() ||
+        !this.formData.username?.trim() || 
+        !this.formData.email?.trim() ||
+        !this.formData.password?.trim() || 
+        !this.formData.phoneNumber?.trim() ||
+        this.formData.genre === '') {
+          // this.toastr.error('Please check the form for errors.', 'Invalid Form', {
+          //   positionClass: 'toast-top-center',
+          //   timeOut: 3000,
+          //   closeButton: true
+          // });
+    }
+    this.registerAdmin();
+    return true;
+}
+
 }

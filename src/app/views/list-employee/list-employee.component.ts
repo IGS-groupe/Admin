@@ -17,7 +17,16 @@ export class ListEmployeeComponent implements OnInit {
   nameFilter: string = '';
   emailFilter: string = '';
 
+<<<<<<< HEAD
   constructor(private userService: UserService, private router: Router) {}
+=======
+  constructor(private userService: UserService,private router: Router,) {
+    const userId = localStorage.getItem('AdminId'); 
+    if(!userId){
+      this.router.navigate(['/account/login']);
+    }
+   }
+>>>>>>> d7d513868242138903625c265c19eb668a5f4266
 
   ngOnInit() {
     this.fetchUsers();

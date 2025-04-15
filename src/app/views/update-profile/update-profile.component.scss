@@ -1,0 +1,62 @@
+.container {
+    max-width: 1200px; /* Adjust width as needed */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add some padding inside the container */
+    background-color: #f9f9f9; /* Light grey background */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around the container */
+    margin-top: 20px; /* Add some margin to the top */
+  }
+  
+  .nav-tabs {
+    margin-bottom: 20px; /* Space below the tabs */
+  }
+  
+  .nav-tabs .nav-link {
+    color: #495057; /* Tab text color */
+    background-color: #f8f9fa; /* Tab background color */
+    margin-right: 5px; /* Space between tabs */
+    border: solid 1px transparent; /* Hide border */
+    border-radius: 0.25rem 0.25rem 0 0; /* Only round the top corners */
+  }
+  
+  .nav-tabs .nav-link.active {
+    color: #fff; /* Active tab text color */
+    background-color: #007bff; /* Active tab background color */
+    border-color: #007bff; /* Border color for the active tab */
+  }
+  
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff; /* Background color for the active tab content */
+    border-bottom-color: transparent; /* Hide bottom border */
+  }
+  
+  .form-group label {
+    font-weight: bold; /* Make label texts bold */
+  }
+  
+  .form-control {
+    border-radius: 0.25rem; /* Slightly round the input field corners */
+    border: 1px solid #ced4da; /* Input field border */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Primary button background color */
+    border-color: #007bff; /* Primary button border color */
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d; /* Secondary button background color */
+    border-color: #6c757d; /* Secondary button border color */
+  }
+  
+  /* Adjust button sizes and spaces */
+  .btn {
+    margin-right: 0.5rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  /* Additional custom styles */
+  /* ... */
+  
