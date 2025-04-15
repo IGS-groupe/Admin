@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 
@@ -47,6 +48,10 @@ export const routes: Routes = [
         path: 'add_parametre',
         loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
       },
+      {
+           path: 'charts',
+           loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
+         },
       // {
       //   path: 'theme',
       //   loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

@@ -1,28 +1,58 @@
-<div fxLayout="column" fxLayoutGap="10px">
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="accent" (click)="onAddButtonClick()">Ajouter Parameter</button>
+<div class="param-card-container">
+  <!-- Header Section -->
+  <div class="param-card-header">
+    <div class="title-section">
+      <h2 class="title">📊 Paramètres Analytiques</h2>
+
+    </div>
+    <button mat-raised-button class="add-button" (click)="onAddButtonClick()">
+      ➕ Ajouter
+    </button>
   </div>
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Filter Bar -->
+  <div class="param-filter-bar">
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Filtrer par analyte</mat-label>
+      <input matInput [(ngModel)]="nameFilter" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Filtrer par unité</mat-label>
+      <input matInput [(ngModel)]="unitFilter" />
+    </mat-form-field>
+  </div>
+
+  <!-- Table -->
+  <mat-table [dataSource]="filteredData" class="styled-table mat-elevation-z8">
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Analyte </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>Analyte</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
     </ng-container>
+
     <ng-container matColumnDef="rdl">
-      <mat-header-cell *matHeaderCellDef> RDL </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rdl}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>RDL</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.rdl }}</mat-cell>
     </ng-container>
+
     <ng-container matColumnDef="unit">
-      <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>Unité</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.unit }}</mat-cell>
     </ng-container>
+
     <ng-container matColumnDef="available">
-      <mat-header-cell *matHeaderCellDef> disponible</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Disponible</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-checkbox (change)="updateAvailability(element)" [checked]="element.available"></mat-checkbox>
+        <mat-slide-toggle
+          [checked]="element.available"
+          (change)="updateAvailability(element)">
+        </mat-slide-toggle>
       </mat-cell>
     </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"></mat-paginator>
 </div>

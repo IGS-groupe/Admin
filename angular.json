@@ -104,7 +104,9 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/scss/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }

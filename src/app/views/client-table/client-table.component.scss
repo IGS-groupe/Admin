@@ -1,36 +1,71 @@
 .client-table-container {
-    margin: 20px;
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
+  padding: 20px;
+  background-color: var(--cui-body-bg);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  .table-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .filter-bar {
+    background: var(--cui-card-bg, #fff);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    gap: 2rem;
+
+    .form-group {
+      min-width: 220px;
+
+      label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
       }
-  
-      th {
-        background-color: #f4f4f4;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-  
-      button {
-        padding: 5px 10px;
-        margin-right: 5px;
-        cursor: pointer;
-        background-color: #007BFF;
-        border: none;
-        border-radius: 5px;
-        color: white;
-  
-        &:hover {
-          background-color: #0056b3;
-        }
+
+      input {
+        border-radius: 8px;
+        padding: 6px 12px;
       }
     }
   }
-  
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+  }
+
+  .custom-modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+    h5 {
+      margin-bottom: 15px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+  }
+
+  .btn {
+    transition: background-color 0.3s ease-in-out;
+  }
+}

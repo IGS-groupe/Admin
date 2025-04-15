@@ -1,37 +1,64 @@
-.form-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.form-card {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  max-width: 700px;
+  margin: 0 auto;
+
+  .form-header {
+    margin-bottom: 25px;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      color: #333;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #777;
+      margin-top: 8px;
+
+      .required-star {
+        color: #e53935;
+        font-weight: bold;
+      }
+    }
   }
-  
-  .main-title {
-    margin-bottom: 20px;
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
   }
-  
-  .required-note {
-    font-size: 14px;
-    color: #666;
+
+  .submit-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+
+    .submit-btn {
+      padding: 12px 30px;
+      font-weight: bold;
+      font-size: 15px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+      }
+    }
   }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .submit-button {
-    margin-top: 20px;
-  }
-  
+}

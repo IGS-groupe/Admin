@@ -1,31 +1,85 @@
-.table-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  
-    .button-row {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 10px;
+.param-card-container {
+  padding: 30px;
+  background-color: #f5f7fb;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Header Section
+.param-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .title-section {
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #777;
+      margin: 4px 0 0;
     }
   }
-  .button-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-    padding-right: 20px;  // Adds right padding for better alignment
-  
-    button {
-      background-color: #1976d2;  // Example blue background color
-      color: white;  // White text color
-      font-size: 16px;  // Larger font size for better readability
-      border-radius: 4px;  // Rounded corners
-      padding: 8px 16px;  // Padding inside the button for better text display
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);  // Subtle shadow for 3D effect
-  
-      &:hover {
-        background-color: darken(#1976d2, 10%);  // Darken on hover for interaction feedback
-      }
+
+  .add-button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #0056b3, #003d80);
+      transform: scale(1.03);
     }
   }
-  
+}
+
+// Filter Section
+.param-filter-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    width: 260px;
+  }
+}
+
+// Table Styling
+.styled-table {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+
+  mat-header-cell {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333;
+    padding: 16px;
+  }
+
+  mat-cell {
+    padding: 14px;
+    font-size: 14px;
+    color: #444;
+  }
+
+  mat-row:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  mat-slide-toggle {
+    margin-left: 8px;
+  }
+}

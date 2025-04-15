@@ -1,26 +1,31 @@
-<div class="form-container">
-  <div class="main-title">
-    <h2>Ajouter Paramater</h2>
-    <p class="required-note"><span>*</span>: required</p>
+<div class="form-card">
+  <div class="form-header">
+    <h2>➕ Ajouter un Paramètre</h2>
+    <p class="note">Les champs marqués d’un <span class="required-star">*</span> sont obligatoires.</p>
   </div>
 
-  <div class="add-parameter-form">
-    <form (ngSubmit)="submit()">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newParameter.name" name="name" required>
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="RDL" [(ngModel)]="newParameter.rdl" name="rdl" required>
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Unit" [(ngModel)]="newParameter.unit" name="unit" required>
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary">Ajouter Paramater</button>
-        </div>
-      </div>
-    </form>
-  </div>
+  <form (ngSubmit)="submit()" class="param-form">
+    <div class="form-grid">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de l’analyte *</mat-label>
+        <input matInput [(ngModel)]="newParameter.name" name="name" required />
+      </mat-form-field>
 
+      <mat-form-field appearance="fill">
+        <mat-label>RDL *</mat-label>
+        <input matInput type="number" [(ngModel)]="newParameter.rdl" name="rdl" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Unité *</mat-label>
+        <input matInput [(ngModel)]="newParameter.unit" name="unit" required />
+      </mat-form-field>
+    </div>
+
+    <div class="submit-section">
+      <button mat-raised-button color="primary" type="submit" class="submit-btn">
+        ✅ Enregistrer
+      </button>
+    </div>
+  </form>
 </div>

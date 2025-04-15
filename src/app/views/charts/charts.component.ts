@@ -1,144 +1,111 @@
 import { Component } from '@angular/core';
 import { ChartData } from 'chart.js';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
-import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent } from '@coreui/angular';
+import {
+  RowComponent,
+  ColComponent,
+  TextColorDirective,
+  CardComponent,
+  CardHeaderComponent,
+  CardBodyComponent
+} from '@coreui/angular';
 import { DocsCalloutComponent } from '@docs-components/public-api';
 
 @Component({
-    selector: 'app-charts',
-    templateUrl: './charts.component.html',
-    styleUrls: ['./charts.component.scss'],
-    standalone: true,
-    imports: [RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ChartjsComponent]
+  selector: 'app-charts',
+  templateUrl: './charts.component.html',
+  styleUrls: ['./charts.component.scss'],
+  standalone: true,
+  imports: [
+    RowComponent,
+    ColComponent,
+    DocsCalloutComponent,
+    TextColorDirective,
+    CardComponent,
+    CardHeaderComponent,
+    CardBodyComponent,
+    ChartjsComponent
+  ]
 })
 export class ChartsComponent {
-
   options = {
     maintainAspectRatio: false
   };
 
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
+  // Example months (simulate parameters created each month)
   chartBarData: ChartData = {
-    labels: [...this.months].slice(0, 7),
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [
       {
-        label: 'GitHub Commits',
-        backgroundColor: '#f87979',
-        data: [40, 20, 12, 39, 17, 42, 79]
+        label: 'Paramètres ajoutés',
+        backgroundColor: '#42a5f5',
+        data: [5, 8, 12, 7, 9, 15, 10]
       }
     ]
   };
 
-  // chartBarOptions = {
-  //   maintainAspectRatio: false,
-  // };
-
+  // Line chart simulating average RDL value per month
   chartLineData: ChartData = {
-    labels: [...this.months].slice(0, 7),
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [
       {
-        label: 'My First dataset',
-        backgroundColor: 'rgba(220, 220, 220, 0.2)',
-        borderColor: 'rgba(220, 220, 220, 1)',
-        pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-        pointBorderColor: '#fff',
-        data: [this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData]
-      },
-      {
-        label: 'My Second dataset',
-        backgroundColor: 'rgba(151, 187, 205, 0.2)',
-        borderColor: 'rgba(151, 187, 205, 1)',
-        pointBackgroundColor: 'rgba(151, 187, 205, 1)',
-        pointBorderColor: '#fff',
-        data: [this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData]
+        label: 'Moyenne RDL',
+        borderColor: '#66bb6a',
+        backgroundColor: 'rgba(102,187,106,0.2)',
+        data: [4.2, 3.8, 5.0, 4.6, 5.5, 4.1, 4.9]
       }
     ]
   };
 
-  chartLineOptions = {
-    maintainAspectRatio: false
-  };
-
+  // Doughnut chart simulating unit distribution
   chartDoughnutData: ChartData = {
-    labels: ['VueJs', 'EmberJs', 'ReactJs', 'Angular'],
+    labels: ['mg/L', 'g/L', 'ppm', 'µg/mL'],
     datasets: [
       {
-        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-        data: [40, 20, 80, 10]
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0'],
+        data: [15, 25, 10, 5]
       }
     ]
   };
 
-  // chartDoughnutOptions = {
-  //   aspectRatio: 1,
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   radius: '100%'
-  // };
-
+  // Pie chart for availability status
   chartPieData: ChartData = {
-    labels: ['Red', 'Green', 'Yellow'],
+    labels: ['Disponible', 'Indisponible'],
     datasets: [
       {
-        data: [300, 50, 100],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        backgroundColor: ['#4caf50', '#f44336'],
+        data: [30, 10]
       }
     ]
   };
 
-  // chartPieOptions = {
-  //   aspectRatio: 1,
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   radius: '100%'
-  // };
-
+  // Polar chart showing parameter type coverage (fake types)
   chartPolarAreaData: ChartData = {
-    labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
+    labels: ['Métaux', 'Nitrates', 'Chlorures', 'Sulfates', 'pH'],
     datasets: [
       {
-        data: [11, 16, 7, 3, 14],
-        backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#E7E9ED', '#36A2EB']
+        backgroundColor: ['#2196f3', '#e91e63', '#ffc107', '#9c27b0', '#607d8b'],
+        data: [12, 9, 7, 5, 10]
       }
     ]
   };
 
+  // Radar chart comparing parameter growth (2 fake years)
   chartRadarData: ChartData = {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+    labels: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'],
     datasets: [
       {
-        label: '2020',
-        backgroundColor: 'rgba(179,181,198,0.2)',
-        borderColor: 'rgba(179,181,198,1)',
-        pointBackgroundColor: 'rgba(179,181,198,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(179,181,198,1)',
-        data: [65, 59, 90, 81, 56, 55, 40]
+        label: '2023',
+        borderColor: '#3f51b5',
+        backgroundColor: 'rgba(63,81,181,0.2)',
+        data: [4, 7, 5, 9, 6, 8]
       },
       {
-        label: '2021',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        pointBackgroundColor: 'rgba(255,99,132,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(255,99,132,1)',
-        data: [this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData, this.randomData]
+        label: '2024',
+        borderColor: '#ff9800',
+        backgroundColor: 'rgba(255,152,0,0.2)',
+        data: [6, 8, 6, 10, 9, 11]
       }
     ]
   };
-
-  // chartRadarOptions = {
-  //   aspectRatio: 1.5,
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  // };
-
-  get randomData() {
-    return Math.round(Math.random() * 100);
-  }
-
 }

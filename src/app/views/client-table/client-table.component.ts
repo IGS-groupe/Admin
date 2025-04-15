@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
@@ -7,14 +8,18 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.scss'
 })
-export class ClientTableComponent  implements OnInit {
+export class ClientTableComponent implements OnInit {
   clients: User[] = [];
+  nameFilter: string = '';
+  emailFilter: string = '';
+  selectedClient: User | null = null;
+  showModal = false;
 
-  constructor(private userService: UserService,private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.fetchUsers();
@@ -28,13 +33,32 @@ export class ClientTableComponent  implements OnInit {
       this.router.navigate(['/login']);
     });
   }
-  disable(userId: number) {
-    this.userService.disableUser(userId).then(response => {
-      console.log('User disabled successfully', response);
-      this.fetchUsers();
-    }).catch(error => {
-      console.error('Failed to disable user', error);
-      // Handle errors, maybe show a message to the user
-    });
+
+  filteredClients(): User[] {
+    return this.clients.filter(client =>
+      client.firstName?.toLowerCase().includes(this.nameFilter.toLowerCase()) &&
+      client.email?.toLowerCase().includes(this.emailFilter.toLowerCase())
+    );
+  }
+
+  openConfirmationModal(client: User) {
+    this.selectedClient = client;
+    this.showModal = true;
+  }
+
+  confirmDisable() {
+    if (this.selectedClient) {
+      this.userService.disableUser(this.selectedClient.id).then(() => {
+        this.fetchUsers();
+        this.closeModal();
+      }).catch(error => {
+        console.error('Failed to disable user', error);
+      });
+    }
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedClient = null;
   }
 }

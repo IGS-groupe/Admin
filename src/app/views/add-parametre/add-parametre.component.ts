@@ -1,49 +1,53 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ParameterService } from 'src/app/services/parameter.service';
-import { Parameter } from 'src/app/models/parameter.model';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-parametre',
   standalone: true,
-  imports: [FormsModule, CommonModule, MatTableModule, MatCheckboxModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
   templateUrl: './add-parametre.component.html',
   styleUrls: ['./add-parametre.component.scss']
 })
 export class AddParametreComponent implements OnInit {
 
-  newParameter = { name: '', rdl: 0, unit: '' , available:true };
+  newParameter = { name: '', rdl: 0, unit: '', available: true };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private parameterService: ParameterService, private router: Router) { }
+  constructor(
+    private parameterService: ParameterService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-  
-  }
+  ngOnInit() {}
 
-
-  addParameter(): void {
-   
-  }
-
-  
   submit(): void {
     if (this.newParameter.name && this.newParameter.rdl && this.newParameter.unit) {
-      this.parameterService.saveParameter(this.newParameter).then(parameter => {
-        this.newParameter = { name: '', rdl: 0, unit: '',available:true }; 
-        this.router.navigate(['/ListParamater']);// Reset the form fields
+      this.parameterService.saveParameter(this.newParameter).then(() => {
+        this.newParameter = { name: '', rdl: 0, unit: '', available: true };
+        this.router.navigate(['/ListParamater']);
       }).catch(error => {
         console.error('Failed to save parameter:', error);
       });
     }
-  } 
+  }
 }
