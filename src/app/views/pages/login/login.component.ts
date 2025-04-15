@@ -62,15 +62,13 @@ export class LoginComponent implements OnInit {
   
       this.userService.login(loginData)
         .then(response => {
-          const roles = response.roles;  // Correctly access roles
-          if(!roles.includes("ROLE_USER")){
+         
             console.log(response.token);
             localStorage.setItem('AdminId', response.userId.toString());
             localStorage.setItem('token', response.token);
             this.router.navigate(['/Listdemandes']);
-          }else{
-            this.error = 'Unauthorized access.';
-          }
+          
+          
         })
         .catch(error => {
           console.error('API Error:', error);

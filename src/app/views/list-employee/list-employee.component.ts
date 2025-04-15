@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-list-employee',
@@ -17,16 +17,7 @@ export class ListEmployeeComponent implements OnInit {
   nameFilter: string = '';
   emailFilter: string = '';
 
-<<<<<<< HEAD
   constructor(private userService: UserService, private router: Router) {}
-=======
-  constructor(private userService: UserService,private router: Router,) {
-    const userId = localStorage.getItem('AdminId'); 
-    if(!userId){
-      this.router.navigate(['/account/login']);
-    }
-   }
->>>>>>> d7d513868242138903625c265c19eb668a5f4266
 
   ngOnInit() {
     this.fetchUsers();
