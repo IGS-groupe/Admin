@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Contact} from 'src/app/models/contact.model'; // Adjust the import path as needed
-import { ContactService } from 'src/app/services/contact.service'; // Adjust the import path as needed
+import { Contact } from '../../models/Contact.model'; // Adjust the import path as needed
+import { ContactService } from '../../services/contact.service'; // Adjust the import path as needed
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-messages',

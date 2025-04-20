@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { Contact } from '../models/contact.model';
+import { Contact } from '../models/Contact.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class ContactService {
   constructor() { }
 
   private getAuthHeaders() {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
     return {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'

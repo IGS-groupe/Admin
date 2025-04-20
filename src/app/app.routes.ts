@@ -56,7 +56,11 @@ export const routes: Routes = [
       {
            path: 'charts',
            loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
-         },
+      },
+      {
+        path: 'messages',
+        loadChildren: () => import('./views/messages/messages.component').then((m) => m.MessagesComponent)
+        },
       // {
       //   path: 'theme',
       //   loadChildren: () => import('./views/theme/routes').then((m) => m.routes)

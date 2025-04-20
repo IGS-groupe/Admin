@@ -12,7 +12,7 @@ export class DemandeService {
   constructor() { }
 
   private getAuthHeaders() {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
     return {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'

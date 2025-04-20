@@ -17,7 +17,7 @@ import {
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from './_nav';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user.service';
 
 function isOverflown(element: HTMLElement): boolean {
   return (

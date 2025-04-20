@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
          
             console.log(response.token);
             localStorage.setItem('AdminId', response.userId.toString());
-            localStorage.setItem('token', response.token);
+            localStorage.setItem('Admintoken', response.token);
             this.router.navigate(['/Listdemandes']);
           
           

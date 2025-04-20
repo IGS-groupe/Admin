@@ -12,14 +12,14 @@ export class UserService {
 
   constructor() {}
   private getAuthHeaders() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     return {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
   }
   getClient(): Promise<User[]> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     console.log(token); // Retrieve the token from localStorage
     return axios.get<User[]>(`${this.apiUrl}/users/role/user`, {
       headers: {
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getAdmin(): Promise<User[]> {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
     return axios.get<User[]>(`${this.apiUrl}/users/role/admin`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -54,7 +54,7 @@ export class UserService {
       });
   }
   registerAdmin(signUpData: User): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     return from(axios.post(`${this.apiUrl}/users/signupAdmin`, signUpData, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -67,7 +67,7 @@ export class UserService {
     );
   }
   disableUser(userId: number): Promise<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     return axios.put(`${this.apiUrl}/users/disable/${userId}`, {}, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -79,7 +79,7 @@ export class UserService {
       });
   }
   isAdmin(): Promise<boolean> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     return axios.get<User[]>(`${this.apiUrl}/users/role/admin`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -121,7 +121,7 @@ export class UserService {
 
   // Delete user using Axios
   deleteUser(userId: number): Promise<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Admintoken');
     return axios.delete(`${this.apiUrl}/users/${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
