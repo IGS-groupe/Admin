@@ -14,7 +14,7 @@
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl formControlName="usernameOrEmail" placeholder="Username" />
+                  <input autoComplete="username" cFormControl formControlName="usernameOrEmail" placeholder="Email" />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -38,11 +38,11 @@
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'minWidth.%': 44}" class="text-white bg-primary py-5">
-            <c-card-body class="text-center">
-             
+          <c-card [ngStyle]="{'minWidth.%': 44}" class="bg-white p-0 d-flex flex-column justify-content-center align-items-center">
+            <c-card-body class="d-flex flex-column justify-content-center align-items-center h-100 w-100">
+              <img src="assets/images/logo.png" alt="Logo" style="max-width: 80%; height: auto;" />
             </c-card-body>
-          </c-card>
+          </c-card>             
         </c-card-group>
       </c-col>
     </c-row>

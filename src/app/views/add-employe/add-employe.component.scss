@@ -42,12 +42,31 @@
 }
 
 .form-control {
-  width: 100%; /* Full width of its container */
-  padding: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  height: auto;                // ✅ Let browser auto-adjust height
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  line-height: 1.5;            // ✅ Fix text getting clipped
+  box-sizing: border-box;
+
+  // Only apply appearance reset to inputs, not selects
+  &::-webkit-input-placeholder {
+    color: #999;
+  }
+
+  &::placeholder {
+    color: #999;
+  }
 }
+
+select.form-control {
+  appearance: menulist;       // ✅ Restore default arrow
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+
 
 .form-control:focus {
   border-color: #0056b3;

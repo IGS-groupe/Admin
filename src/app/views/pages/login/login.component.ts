@@ -12,7 +12,7 @@ import {
 } from '@coreui/angular';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../services/user.service';
 // import { ToastrService } from 'ngx-toastr';
 import { Observable, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

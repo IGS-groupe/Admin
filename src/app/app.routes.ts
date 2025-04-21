@@ -59,8 +59,9 @@ export const routes: Routes = [
       },
       {
         path: 'messages',
-        loadChildren: () => import('./views/messages/messages.component').then((m) => m.MessagesComponent)
-        },
+        loadComponent: () => import('./views/messages/messages.component').then(m => m.MessagesComponent)
+      }
+      
       // {
       //   path: 'theme',
       //   loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
