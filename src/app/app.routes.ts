@@ -50,9 +50,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/add-employe/routes').then((m) => m.routes)
       },
       {
-        path: 'add_parametre',
-        loadChildren: () => import('./views/add-parametre/routes').then((m) => m.routes)
+        path: 'news',
+        loadChildren: () => import('./views/news/routes').then(m => m.routes),
+        data: { title: 'News Management' }
       },
+      
       {
            path: 'charts',
            loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
