@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // ✅ Needed for pipes
 import { Router } from '@angular/router';
-import { NewsService } from '../../../services/news.service';
-import { NewsItem } from '../../../models/news';
-
+import { NewsService } from '../../services/news.service';
+import { NewsItem } from '../../models/news';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-news-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss']
 })
@@ -27,7 +27,7 @@ export class NewsListComponent implements OnInit {
   }
 
   editNews(slug: string): void {
-    this.router.navigate(['/news-edit', slug]);
+    this.router.navigate(['/admin/news-edit', slug]);
   }
 
   deleteNews(id: number): void {

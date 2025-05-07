@@ -54,7 +54,18 @@ export const routes: Routes = [
         loadChildren: () => import('./views/news/routes').then(m => m.routes),
         data: { title: 'News Management' }
       },
-      
+      {
+        path: 'news1',
+        loadChildren: () => import('./views/news1/routes').then(m => m.routes),
+      },
+      {
+        path: 'news-create',
+        loadChildren: () => import('./views/news-create/routes').then(m => m.routes),
+      },
+      {
+        path: 'news-list',
+        loadChildren: () => import('./views/news-list/routes').then(m => m.routes),
+      },
       {
            path: 'charts',
            loadChildren: () => import('./views/charts/routes').then((m) => m.routes)

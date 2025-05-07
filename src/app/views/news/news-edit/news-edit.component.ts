@@ -32,7 +32,7 @@ export class NewsEditComponent implements OnInit {
   handleUpdate(): void {
     this.newsService.updateNews(this.newsSlug, this.newsItem).subscribe(() => {
       alert('News updated successfully!');
-      this.router.navigate(['/admin/news-list']);
+      this.router.navigate(['/news-list']);
     });
   }
 }
