@@ -11,11 +11,18 @@ import { NewsItem } from '../models/news';
 })
 export class NewsService {
   private apiUrl = 'http://localhost:4000/api/news';
-
+  private apiUrl2 = 'http://localhost:4000/api/auth/news';
+  private getAuthHeaders() {
+    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<NewsItem[]> {
-    return this.http.get<NewsItem[]>(this.apiUrl);
+    return this.http.get<NewsItem[]>(this.apiUrl2);
   }
 
   getBySlug(slug: string): Observable<NewsItem> {
@@ -23,18 +30,26 @@ export class NewsService {
   }
 
   create(news: FormData): Observable<NewsItem> {
-    return this.http.post<NewsItem>(this.apiUrl, news);
+    return this.http.post<NewsItem>(this.apiUrl, news,{
+      headers: this.getAuthHeaders()
+    });
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`,{
+      headers: this.getAuthHeaders()
+    });
   }
   getNewsBySlug(slug: string): Observable<NewsItem> {
-    return this.http.get<NewsItem>(`${this.apiUrl}/${slug}`);
+    return this.http.get<NewsItem>(`${this.apiUrl}/${slug}`,{
+      headers: this.getAuthHeaders()
+    });
   }
   
   updateNews(slug: string, data: Partial<NewsItem>): Observable<NewsItem> {
-    return this.http.put<NewsItem>(`${this.apiUrl}/${slug}`, data);
+    return this.http.put<NewsItem>(`${this.apiUrl}/${slug}`, data,{
+      headers: this.getAuthHeaders()
+    });
   }
   
 }

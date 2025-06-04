@@ -38,8 +38,9 @@ export const navItems: INavData[] = [
   },
   {
     name: 'News',
-    url: 'news',
-    iconComponent: { name: 'cil-notes' }
+    url: '/news', // Add leading slash for absolute path
+    iconComponent: { name: 'cil-notes' },
+    // linkProps: { routerLink: true } // Explicitly tell CoreUI to use routerLink
   },
   {
     name: 'Parametres',
