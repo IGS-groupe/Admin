@@ -42,6 +42,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
       },
       {
+        path: 'DemandeForm',
+        loadComponent: () => import('./views/demande-form/demande-form.component').then((m) => m.DemandeFormComponent)
+      },
+
+      {
         path: 'ListParamater',
         loadComponent: () => import('./views/list-paramater/list-paramater.component').then((m) => m.ListParamaterComponent)
       },

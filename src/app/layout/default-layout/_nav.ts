@@ -42,11 +42,11 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-notes' },
     // linkProps: { routerLink: true } // Explicitly tell CoreUI to use routerLink
   },
-  {
-    name: 'Parametres',
-    url: '/ListParamater',
-    iconComponent: { name: 'cil-notes' }
-  },
+  // {
+  //   name: 'Parametres',
+  //   url: '/ListParamater',
+  //   iconComponent: { name: 'cil-notes' }
+  // },
   {
     name: 'Messages',
     url: '/messages',

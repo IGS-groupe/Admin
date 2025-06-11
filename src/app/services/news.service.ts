@@ -12,13 +12,19 @@ import { NewsItem } from '../models/news';
 export class NewsService {
   private apiUrl = 'http://localhost:4000/api/news';
   private apiUrl2 = 'http://localhost:4000/api/auth/news';
-  private getAuthHeaders() {
+   private getAuthHeaders() {
     const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
     return {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
   }
+  private getFormDataHeaders() {
+    const token = localStorage.getItem('Admintoken');
+    return {
+        'Authorization': `Bearer ${token}`
+    };
+}
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<NewsItem[]> {
@@ -30,11 +36,11 @@ export class NewsService {
   }
 
   create(news: FormData): Observable<NewsItem> {
-    return this.http.post<NewsItem>(this.apiUrl, news,{
-      headers: this.getAuthHeaders()
-    });
+      console.log('Creating news with data:', localStorage.getItem('Admintoken'));
+      return this.http.post<NewsItem>(this.apiUrl, news, {
+          headers: this.getFormDataHeaders()
+      });
   }
-
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`,{
       headers: this.getAuthHeaders()

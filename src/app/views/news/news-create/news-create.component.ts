@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewsService } from '../../../services/news.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-create',
@@ -21,7 +22,7 @@ export class NewsCreateComponent {
 
   selectedImage!: File;
 
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService,private router: Router,) {}
 
   onImageSelected(event: any): void {
     this.selectedImage = event.target.files[0];
@@ -40,6 +41,7 @@ export class NewsCreateComponent {
     this.newsService.create(formData).subscribe({
       next: (response) => {
         console.log('News created:', response);
+        this.router.navigate(['/news']); // Redirect to the news list after successful creation
       },
       error: (err) => {
         console.error('Error creating news:', err);

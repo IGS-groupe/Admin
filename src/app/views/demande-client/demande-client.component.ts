@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // ✅ Import Router
 
 @Component({
   selector: 'app-demande-client',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./demande-client.component.scss']
 })
 export class DemandeClientComponent {
+  constructor(private router: Router) {} // ✅ Inject Router
+
   demandes = [
     {
       DemandeID: 1,
@@ -22,11 +25,14 @@ export class DemandeClientComponent {
 
   acceptDemande(id: number) {
     console.log('Demande accepted with ID:', id);
-    // Here you would handle the acceptance of the demande
   }
 
   refuseDemande(id: number) {
     console.log('Demande refused with ID:', id);
-    // Here you would handle the refusal of the demande
+  }
+
+  // ✅ Add this method for navigation
+  navigateToDemandeForm(): void {
+    this.router.navigate(['/DemandeForm']);
   }
 }

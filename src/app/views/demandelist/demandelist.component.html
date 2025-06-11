@@ -1,4 +1,7 @@
 <div class="demande-table-wrapper">
+ <div class="table-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
+    <button class="btn btn-primary shadow-sm" (click)="navigateToDemandeForm()">Ajouter une Demande</button>
+    <div class="d-flex flex-wrap gap-2">
   <!-- Filter Inputs -->
   <div class="filter-bar-multiple">
     <input
@@ -53,7 +56,7 @@
           <td>{{ demande.langueDuCertificat }}</td>
           <td>{{ demande.commentairesInternes }}</td>
           <td>
-            <button class="btn details-btn" (click)="details(demande.demandeId, demande.etat)">Détails</button>
+            <button class="btn details-btn" (click)="details(demande.demandeId!, demande.etat || '')">Détails</button>
           </td>
         </tr>
       </tbody>

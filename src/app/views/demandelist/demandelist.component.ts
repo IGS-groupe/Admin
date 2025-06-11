@@ -35,6 +35,9 @@ export class DemandelistComponent implements OnInit {
       this.router.navigate(['/account/login']);
     });
   }
+  navigateToDemandeForm(): void {
+    this.router.navigate(['/DemandeForm']);
+  }
 
   onFilterChange(): void {
     const text = this.filterText.toLowerCase();

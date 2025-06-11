@@ -1,0 +1,93 @@
+<div class="app-container">
+  <div class="card-container">
+    <div class="card-body">
+      <h4>New Request</h4>
+      <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
+        <!-- Row: Client selection -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="demandePour">Request for:</label>
+            <select
+              id="demandePour"
+              class="form-control styled-select"
+              formControlName="demandePour"
+            >
+              <option value="" disabled selected hidden>Select a client</option>
+              <option *ngFor="let client of clients" [value]="client.id">
+                {{ client.firstName }} {{ client.lastName }} - {{ client.email }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="envoyeAuLaboratoire">Sent to the laboratory:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="envoyeAuLaboratoire"
+              formControlName="envoyeAuLaboratoire"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="courrielsSupplementaires">Additional emails:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="courrielsSupplementaires"
+              formControlName="courrielsSupplementaires"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="bonDeCommande">Purchase order:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bonDeCommande"
+              formControlName="bonDeCommande"
+            />
+          </div>
+        </div>
+
+        <!-- Row: Additional Emails and Purchase Order -->
+        <div class="form-row">
+          
+
+          
+          <div class="form-group col-md-6">
+            <label for="langueDuCertificat">Certificate language:</label>
+            <select
+              class="form-control styled-select"
+              id="langueDuCertificat"
+              formControlName="langueDuCertificat"
+            >
+              <option value="" disabled>Select Certificate Language</option>
+              <option value="FRANCAIS">Français</option>
+              <option value="ANGLAIS">Anglais</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row: Certificate language -->
+        <div class="form-row">
+          
+        </div>
+
+        <!-- Row: Internal Comments -->
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="commentairesInternes">Internal comments to the analysis request:</label>
+            <textarea
+              class="form-control"
+              id="commentairesInternes"
+              formControlName="commentairesInternes"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="navigateToNext()">Next</button>
+      </form>
+    </div>
+  </div>
+</div>
