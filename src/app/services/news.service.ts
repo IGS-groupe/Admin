@@ -32,7 +32,10 @@ export class NewsService {
   }
 
   getBySlug(slug: string): Observable<NewsItem> {
-    return this.http.get<NewsItem>(`${this.apiUrl}/${slug}`);
+    const token = localStorage.getItem('Admintoken');
+    return this.http.get<NewsItem>(`${this.apiUrl}/slug/${slug}`,{
+      headers: {'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YXNzaW5lIiwiaWF0IjoxNzUwMjYyNDkzLCJleHAiOjE3NTAyNzY4OTN9.zMlkfcSJ4p5eNt4mHFy8lt-YHa22DnFUCaC3dWmAEnQ`}
+    });
   }
 
   create(news: FormData): Observable<NewsItem> {
@@ -52,10 +55,20 @@ export class NewsService {
     });
   }
   
-  updateNews(slug: string, data: Partial<NewsItem>): Observable<NewsItem> {
-    return this.http.put<NewsItem>(`${this.apiUrl}/${slug}`, data,{
-      headers: this.getAuthHeaders()
+  updateNews(id: number, news: NewsItem, imageFile?: File): Observable<NewsItem> {
+  const formData = new FormData();
+    formData.append('title', news.title);
+    formData.append('slug', news.slug);
+    formData.append('date', news.date); // format: yyyy-MM-dd
+    formData.append('content', news.content);
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+
+    return this.http.put<NewsItem>(`${this.apiUrl}/${id}`, formData, {
+      headers: this.getFormDataHeaders()// Ne pas définir Content-Type, Angular le fera
     });
   }
+
   
 }

@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class NewsEditComponent implements OnInit {
   newsSlug!: string;
   newsItem!: NewsItem;
+  selectedFile: File | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,14 +25,20 @@ export class NewsEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.newsSlug = this.route.snapshot.paramMap.get('slug')!;
-    this.newsService.getNewsBySlug(this.newsSlug).subscribe(data => {
+    this.newsService.getBySlug(this.newsSlug).subscribe(data => {
       this.newsItem = data;
     });
   }
 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   handleUpdate(): void {
-    this.newsService.updateNews(this.newsSlug, this.newsItem).subscribe(() => {
-      alert('News updated successfully!');
+    this.newsService.updateNews(this.newsItem.id, this.newsItem, this.selectedFile!).subscribe(() => {
       this.router.navigate(['/news-list']);
     });
   }
