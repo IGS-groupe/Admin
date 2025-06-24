@@ -1,0 +1,37 @@
+.excel-import-section {
+  padding: 1rem;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  margin-bottom: 2rem;
+
+  h5 {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .form-control-file {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #666;
+  }
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  margin-right: 0.5rem;
+  
+  &.submit-btn {
+    min-width: 120px;
+  }
+}
