@@ -2,6 +2,26 @@
   <div class="card-container">
     <div class="card-body">
       <h4>New Request</h4>
+      
+      <!-- Excel Import Section -->
+      <div class="excel-import-section mb-4">
+        <h5>Import from Excel</h5>
+        <div class="form-group">
+          <input
+            type="file"
+            class="form-control-file"
+            id="excelFile"
+            accept=".xlsx, .xls"
+            (change)="onFileSelected($event)"
+          />
+          <small class="form-text text-muted">
+            Upload an Excel file containing one or more requests.
+            The file should have columns matching the form fields (demandePour, envoyeAuLaboratoire, etc.).
+          </small>
+        </div>
+      </div>
+
+      <h5>Or Create Single Request</h5>
       <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
         <!-- Row: Client selection -->
         <div class="form-row">
