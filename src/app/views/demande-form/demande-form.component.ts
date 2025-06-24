@@ -189,4 +189,59 @@ export class DemandeFormComponent implements OnInit {
   navigateToNext(): void {
     this.onSubmit();
   }
+
+  generateExcelTemplate(): void {
+    // Vérifier si nous avons des clients
+    if (this.clients.length === 0) {
+      Swal.fire({
+        title: 'Attention',
+        text: 'Aucun client disponible. Le template utilisera des IDs d\'exemple.',
+        icon: 'warning'
+      });
+    }
+
+    // Prendre les deux premiers clients ou utiliser des IDs d'exemple
+    const client1 = this.clients[0] || { id: 'EXEMPLE_ID_1' };
+    const client2 = this.clients[1] || { id: 'EXEMPLE_ID_2' };
+
+    // Créer un exemple de données
+    const exampleData = [
+      {
+        demandePour: client1.id,
+        envoyeAuLaboratoire: "Laboratoire A",
+        courrielsSupplementaires: "email@example.com",
+        bonDeCommande: "BON-001",
+        langueDuCertificat: "FRANCAIS",
+        commentairesInternes: "Commentaire exemple 1"
+      },
+      {
+        demandePour: client2.id,
+        envoyeAuLaboratoire: "Laboratoire B",
+        courrielsSupplementaires: "contact@example.com",
+        bonDeCommande: "BON-002",
+        langueDuCertificat: "ANGLAIS",
+        commentairesInternes: "Commentaire exemple 2"
+      }
+    ];
+
+    // Créer une feuille de calcul
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exampleData);
+
+    // Ajouter des commentaires pour expliquer les champs
+    ws['!cols'] = [
+      { wch: 20 }, // demandePour
+      { wch: 25 }, // envoyeAuLaboratoire
+      { wch: 30 }, // courrielsSupplementaires
+      { wch: 20 }, // bonDeCommande
+      { wch: 20 }, // langueDuCertificat
+      { wch: 40 }  // commentairesInternes
+    ];
+
+    // Créer le classeur
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Demandes');
+
+    // Télécharger le fichier
+    XLSX.writeFile(wb, 'template_demandes.xlsx');
+  }
 }
