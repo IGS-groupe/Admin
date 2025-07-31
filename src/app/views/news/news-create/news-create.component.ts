@@ -38,14 +38,8 @@ export class NewsCreateComponent {
       formData.append('image', this.selectedImage);
     }
 
-    this.newsService.create(formData).subscribe({
-      next: (response) => {
-        console.log('News created:', response);
-        this.router.navigate(['/news']); // Redirect to the news list after successful creation
-      },
-      error: (err) => {
-        console.error('Error creating news:', err);
-      }
-    });
+    this.newsService.create(formData).subscribe(() => {
+      this.router.navigate(['/news' ]); // Redirect to the news list after successful creation
+      });
   }
 }

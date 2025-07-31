@@ -26,8 +26,8 @@ export class NewsListComponent implements OnInit {
     this.router.navigate(['/news-create']);
   }
 
-  editNews(slug: string): void {
-    this.router.navigate(['/news', 'edit', slug]); // ✅ CORRECT
+  editNews(id: number): void {
+    this.router.navigate(['/news', 'edit', id]); // ✅ CORRECT
 
   }
 

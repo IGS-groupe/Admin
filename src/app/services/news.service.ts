@@ -31,10 +31,10 @@ export class NewsService {
     return this.http.get<NewsItem[]>(this.apiUrl2);
   }
 
-  getBySlug(slug: string): Observable<NewsItem> {
+  getById(id: string): Observable<NewsItem> {
     const token = localStorage.getItem('Admintoken');
-    return this.http.get<NewsItem>(`${this.apiUrl}/slug/${slug}`,{
-      headers: {'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YXNzaW5lIiwiaWF0IjoxNzUwMjYyNDkzLCJleHAiOjE3NTAyNzY4OTN9.zMlkfcSJ4p5eNt4mHFy8lt-YHa22DnFUCaC3dWmAEnQ`}
+    return this.http.get<NewsItem>(`${this.apiUrl}/${id}`,{
+      headers: this.getAuthHeaders()
     });
   }
 

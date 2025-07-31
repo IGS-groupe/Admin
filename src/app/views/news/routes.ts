@@ -12,7 +12,7 @@ export const routes: Routes = [
     data: { title: 'Create News' }
   },
   {
-    path: 'edit/:slug',
+    path: 'edit/:id',
     loadComponent: () => import('./news-edit/news-edit.component').then(m => m.NewsEditComponent),
     data: { title: 'Edit News' }
   }

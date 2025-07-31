@@ -42,12 +42,15 @@
     "axois": "^0.0.1-security",
     "chart.js": "^4.4.2",
     "coreui-free-angular-admin-template": "file:",
+    "file-saver": "^2.0.5",
     "lodash-es": "^4.17.21",
     "ngx-scrollbar": "^13.0.3",
     "ngx-toastr": "^18.0.0",
     "react-toastify": "^10.0.5",
     "rxjs": "~7.8.1",
+    "sweetalert2": "^11.22.1",
     "tslib": "^2.6.2",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.4"
   },
   "devDependencies": {

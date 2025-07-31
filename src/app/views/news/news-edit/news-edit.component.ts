@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./news-edit.component.scss']
 })
 export class NewsEditComponent implements OnInit {
-  newsSlug!: string;
+  newsId!: string;
   newsItem!: NewsItem;
   selectedFile: File | null = null;
 
@@ -24,8 +24,9 @@ export class NewsEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.newsSlug = this.route.snapshot.paramMap.get('slug')!;
-    this.newsService.getBySlug(this.newsSlug).subscribe(data => {
+    this.newsId = this.route.snapshot.paramMap.get('id')!;
+    console.log('News ID:', this.newsId);
+    this.newsService.getById(this.newsId).subscribe(data => {
       this.newsItem = data;
     });
   }
@@ -39,7 +40,7 @@ export class NewsEditComponent implements OnInit {
 
   handleUpdate(): void {
     this.newsService.updateNews(this.newsItem.id, this.newsItem, this.selectedFile!).subscribe(() => {
-      this.router.navigate(['/news-list']);
+      this.router.navigate(['/news' ]);
     });
   }
 }

@@ -16,7 +16,7 @@
             <p class="card-text">{{ news.content | slice:0:100 }}...</p>
   
             <div class="mt-auto d-flex justify-content-between">
-              <button class="btn btn-primary btn-sm" (click)="editNews(news.slug)">Edit</button>
+              <button class="btn btn-primary btn-sm" (click)="editNews(news.id)">Edit</button>
               <button class="btn btn-danger btn-sm" (click)="deleteNews(news.id)">Delete</button>
             </div>
           </div>
