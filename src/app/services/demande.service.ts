@@ -77,4 +77,35 @@ export class DemandeService {
         throw error;
       });
   }
+  
+  // New methods for managing multiple clients
+  addClientToDemande(demandeId: number, clientId: number): Promise<any> {
+    return axios.post<any>(`${this.apiUrl}/${demandeId}/clients/${clientId}`, {}, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error adding client to demande', error);
+        throw error;
+      });
+  }
+  
+  removeClientFromDemande(demandeId: number, clientId: number): Promise<any> {
+    return axios.delete<any>(`${this.apiUrl}/${demandeId}/clients/${clientId}`, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error removing client from demande', error);
+        throw error;
+      });
+  }
+  
+  getDemandesByClientId(clientId: number): Promise<Demande[]> {
+    return axios.get<Demande[]>(`${this.apiUrl}/client/${clientId}`, {
+      headers: this.getAuthHeaders()
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Error fetching demandes by client id', error);
+        throw error;
+      });
+  }
 }
