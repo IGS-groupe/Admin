@@ -1,23 +1,130 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+.excel-import-section {
+  padding: 1rem;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  margin-bottom: 2rem;
 
-import { DemandeFormComponent } from './demande-form.component';
+  h5 {
+    color: #666;
+    margin-bottom: 1rem;
+  }
 
-describe('DemandeFormComponent', () => {
-  let component: DemandeFormComponent;
-  let fixture: ComponentFixture<DemandeFormComponent>;
+  .form-control-file {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+  }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [DemandeFormComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(DemandeFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #666;
+  }
+}
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  margin-right: 0.5rem;
+  
+  &.submit-btn {
+    min-width: 120px;
+  }
+}
+
+// Client selection styles
+.client-selection-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: #fafafa;
+  max-height: 300px;
+  overflow-y: auto;
+
+  .selected-clients-display {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #e7f3ff;
+    border: 1px solid #b3d7ff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .client-checkboxes {
+    .client-checkbox-item {
+      margin-bottom: 0.5rem;
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 0;
+        user-select: none;
+
+        .client-checkbox {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+
+          &:checked ~ .checkmark {
+            background-color: #007bff;
+            border-color: #007bff;
+
+            &:after {
+              display: block;
+            }
+          }
+        }
+
+        .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #ddd;
+          border-radius: 3px;
+          transition: all 0.3s ease;
+
+          &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 6px;
+            top: 2px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
+
+        .client-name {
+          margin-left: 10px;
+          flex: 1;
+        }
+
+        &:hover .checkmark {
+          border-color: #007bff;
+        }
+      }
+    }
+  }
+
+  .no-selection-message {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+    font-style: italic;
+  }
+}
