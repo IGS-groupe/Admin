@@ -32,7 +32,7 @@ export class DemandeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.demandeForm = this.fb.group({
-      demandePour: ['', Validators.required],
+      demandePour: [[], Validators.required], // Changed to array for multiple selection
       envoyeAuLaboratoire: ['', Validators.required],
       courrielsSupplementaires: [''],
       bonDeCommande: ['', Validators.required],
@@ -83,26 +83,30 @@ export class DemandeFormComponent implements OnInit {
           throw new Error('Données Excel invalides: Les champs demandePour, envoyeAuLaboratoire, bonDeCommande et langueDuCertificat sont obligatoires');
         }
 
-        // Vérifier si le client existe
-        const clientId = row.demandePour;
-        const client = this.clients.find(c => c.id === clientId);
+        // Handle multiple clients (comma-separated IDs)
+        const clientIds = row.demandePour.toString().split(',').map((id: string) => id.trim());
         
-        if (!client) {
-          throw new Error(`Client avec ID ${clientId} non trouvé`);
+        for (const clientId of clientIds) {
+          // Vérifier si le client existe
+          const client = this.clients.find(c => c.id === clientId);
+          
+          if (!client) {
+            throw new Error(`Client avec ID ${clientId} non trouvé`);
+          }
+
+          const newDemande: Demande = {
+            demandePour: client ? `${client.firstName || 'Unknown'} ${client.lastName || 'Unknown'}` : 'Unknown Unknown',
+            envoyeAuLaboratoire: row.envoyeAuLaboratoire,
+            courrielsSupplementaires: row.courrielsSupplementaires || '',
+            bonDeCommande: row.bonDeCommande,
+            unEchantillon: false,
+            langueDuCertificat: row.langueDuCertificat,
+            commentairesInternes: row.commentairesInternes || '',
+            userId: clientId
+          };
+
+          demandes.push(newDemande);
         }
-
-        const newDemande: Demande = {
-          demandePour: client ? `${client.firstName || 'Unknown'} ${client.lastName || 'Unknown'}` : 'Unknown Unknown',
-          envoyeAuLaboratoire: row.envoyeAuLaboratoire,
-          courrielsSupplementaires: row.courrielsSupplementaires || '',
-          bonDeCommande: row.bonDeCommande,
-          unEchantillon: false,
-          langueDuCertificat: row.langueDuCertificat,
-          commentairesInternes: row.commentairesInternes || '',
-          userId: clientId
-        };
-
-        demandes.push(newDemande);
       }
 
       // Demander confirmation à l'utilisateur
@@ -158,36 +162,119 @@ export class DemandeFormComponent implements OnInit {
   onSubmit(): void {
     if (this.demandeForm.valid) {
       const formValues = this.demandeForm.value;
-      const selectedClient = formValues.demandePour;
-      const selectedClient1 = this.clients.find(client => client.id == selectedClient);
-      console.log('Selected client:', selectedClient1);
-      const newDemande: Demande = {
-        demandePour: selectedClient1 ? `${selectedClient1.firstName || 'Unknown'} ${selectedClient1.lastName || 'Unknown'}` : 'Unknown Unknown', // Concatenated string // Default values if client not found
-        envoyeAuLaboratoire: formValues.envoyeAuLaboratoire,
-        courrielsSupplementaires: formValues.courrielsSupplementaires,
-        bonDeCommande: formValues.bonDeCommande,
-        unEchantillon: false,
-        langueDuCertificat: formValues.langueDuCertificat,
-        commentairesInternes: formValues.commentairesInternes,
-        userId: formValues.demandePour // ✅ Maps to DTO field
-      };
+      const selectedClientIds = formValues.demandePour; // Array of client IDs
+      
+      if (!selectedClientIds || selectedClientIds.length === 0) {
+        Swal.fire({
+          title: 'Erreur',
+          text: 'Veuillez sélectionner au moins un client',
+          icon: 'error'
+        });
+        return;
+      }
 
-      console.log('🚀 Sending to backend:', newDemande);
-
-      this.demandeService.createDemande(newDemande).then(saved => {
-        console.log('✅ Demande created:', saved);
-        this.router.navigate(['/demandelist']);
-      }).catch(error => {
-        console.error('❌ Failed to submit demande:', error);
+      // Create a demande for each selected client
+      const demandes: Demande[] = selectedClientIds.map((clientId: any) => {
+        const selectedClient = this.clients.find(client => client.id == clientId);
+        console.log('Selected client:', selectedClient);
+        
+        return {
+          demandePour: selectedClient ? `${selectedClient.firstName || 'Unknown'} ${selectedClient.lastName || 'Unknown'}` : 'Unknown Unknown',
+          envoyeAuLaboratoire: formValues.envoyeAuLaboratoire,
+          courrielsSupplementaires: formValues.courrielsSupplementaires,
+          bonDeCommande: formValues.bonDeCommande,
+          unEchantillon: false,
+          langueDuCertificat: formValues.langueDuCertificat,
+          commentairesInternes: formValues.commentairesInternes,
+          userId: clientId
+        };
       });
+
+      console.log('🚀 Sending to backend:', demandes);
+
+      // Submit all demandes
+      this.submitMultipleDemandes(demandes);
 
     } else {
       this.demandeForm.markAllAsTouched();
     }
   }
 
+  async submitMultipleDemandes(demandes: Demande[]): Promise<void> {
+    try {
+      // Show confirmation dialog
+      const result = await Swal.fire({
+        title: 'Confirmation',
+        html: `Voulez-vous créer ${demandes.length} demande(s) pour les clients sélectionnés ?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Oui, créer',
+        cancelButtonText: 'Annuler',
+        reverseButtons: true
+      });
+
+      if (result.isConfirmed) {
+        // Submit each demande
+        for (const demande of demandes) {
+          await this.demandeService.createDemande(demande);
+        }
+
+        // Show success message
+        await Swal.fire({
+          title: 'Succès!',
+          text: `${demandes.length} demande(s) ont été créée(s) avec succès`,
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false
+        });
+
+        // Navigate to list
+        this.router.navigate(['/demandelist']);
+      }
+    } catch (error: any) {
+      console.error('❌ Failed to submit demandes:', error);
+      await Swal.fire({
+        title: 'Erreur',
+        text: 'Une erreur est survenue lors de la création des demandes',
+        icon: 'error'
+      });
+    }
+  }
+
   navigateToNext(): void {
     this.onSubmit();
+  }
+
+  // Utility methods for multi-select
+  isClientSelected(clientId: any): boolean {
+    const selectedClients = this.demandeForm.get('demandePour')?.value || [];
+    return selectedClients.includes(clientId);
+  }
+
+  toggleClientSelection(clientId: any): void {
+    const selectedClients = this.demandeForm.get('demandePour')?.value || [];
+    const index = selectedClients.indexOf(clientId);
+    
+    if (index > -1) {
+      // Remove client if already selected
+      selectedClients.splice(index, 1);
+    } else {
+      // Add client if not selected
+      selectedClients.push(clientId);
+    }
+    
+    this.demandeForm.patchValue({ demandePour: selectedClients });
+  }
+
+  getSelectedClientsNames(): string {
+    const selectedClientIds = this.demandeForm.get('demandePour')?.value || [];
+    const selectedClients = this.clients.filter(client => 
+      selectedClientIds.includes(client.id)
+    );
+    
+    return selectedClients.map(client => 
+      `${client.firstName} ${client.lastName}`
+    ).join(', ');
   }
 
   generateExcelTemplate(): void {
@@ -200,14 +287,15 @@ export class DemandeFormComponent implements OnInit {
       });
     }
 
-    // Prendre les deux premiers clients ou utiliser des IDs d'exemple
+    // Prendre les premiers clients ou utiliser des IDs d'exemple
     const client1 = this.clients[0] || { id: 'EXEMPLE_ID_1' };
     const client2 = this.clients[1] || { id: 'EXEMPLE_ID_2' };
+    const client3 = this.clients[2] || { id: 'EXEMPLE_ID_3' };
 
-    // Créer un exemple de données
+    // Créer un exemple de données avec sélection simple et multiple
     const exampleData = [
       {
-        demandePour: client1.id,
+        demandePour: client1.id, // Single client
         envoyeAuLaboratoire: "Laboratoire A",
         courrielsSupplementaires: "email@example.com",
         bonDeCommande: "BON-001",
@@ -215,12 +303,12 @@ export class DemandeFormComponent implements OnInit {
         commentairesInternes: "Commentaire exemple 1"
       },
       {
-        demandePour: client2.id,
+        demandePour: `${client2.id},${client3.id}`, // Multiple clients (comma-separated)
         envoyeAuLaboratoire: "Laboratoire B",
         courrielsSupplementaires: "contact@example.com",
         bonDeCommande: "BON-002",
         langueDuCertificat: "ANGLAIS",
-        commentairesInternes: "Commentaire exemple 2"
+        commentairesInternes: "Commentaire exemple 2 - pour plusieurs clients"
       }
     ];
 
@@ -229,19 +317,48 @@ export class DemandeFormComponent implements OnInit {
 
     // Ajouter des commentaires pour expliquer les champs
     ws['!cols'] = [
-      { wch: 20 }, // demandePour
+      { wch: 30 }, // demandePour (plus large pour les IDs multiples)
       { wch: 25 }, // envoyeAuLaboratoire
       { wch: 30 }, // courrielsSupplementaires
       { wch: 20 }, // bonDeCommande
       { wch: 20 }, // langueDuCertificat
-      { wch: 40 }  // commentairesInternes
+      { wch: 50 }  // commentairesInternes (plus large)
     ];
 
     // Créer le classeur
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Demandes');
 
+    // Ajouter une feuille d'instructions
+    const instructionsData = [
+      { Field: 'demandePour', Description: 'ID(s) du/des client(s). Pour plusieurs clients, séparez les IDs par des virgules', Example: 'CLIENT1,CLIENT2,CLIENT3' },
+      { Field: 'envoyeAuLaboratoire', Description: 'Nom du laboratoire destinataire', Example: 'Laboratoire Central' },
+      { Field: 'courrielsSupplementaires', Description: 'Emails supplémentaires (optionnel)', Example: 'contact@example.com' },
+      { Field: 'bonDeCommande', Description: 'Numéro de bon de commande', Example: 'BON-12345' },
+      { Field: 'langueDuCertificat', Description: 'Langue du certificat: FRANCAIS ou ANGLAIS', Example: 'FRANCAIS' },
+      { Field: 'commentairesInternes', Description: 'Commentaires internes (optionnel)', Example: 'Commentaire...' }
+    ];
+    
+    const instructionsWs: XLSX.WorkSheet = XLSX.utils.json_to_sheet(instructionsData);
+    instructionsWs['!cols'] = [
+      { wch: 25 }, // Field
+      { wch: 60 }, // Description
+      { wch: 30 }  // Example
+    ];
+    XLSX.utils.book_append_sheet(wb, instructionsWs, 'Instructions');
+
     // Télécharger le fichier
-    XLSX.writeFile(wb, 'template_demandes.xlsx');
+    XLSX.writeFile(wb, 'template_demandes_multi_clients.xlsx');
+
+    // Afficher un message d'information
+    Swal.fire({
+      title: 'Template téléchargé',
+      html: `Le template Excel a été téléchargé avec des exemples pour:<br>
+             • Demande pour un seul client<br>
+             • Demande pour plusieurs clients<br><br>
+             <strong>Note:</strong> Pour sélectionner plusieurs clients, séparez les IDs par des virgules.`,
+      icon: 'info',
+      confirmButtonText: 'Compris'
+    });
   }
 }
