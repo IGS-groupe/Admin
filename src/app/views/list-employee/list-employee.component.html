@@ -1,17 +1,17 @@
 <div class="client-table-container">
   <div class="table-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
-    <button (click)="navigateToDashboard()">Ajouter Admin</button>
+    <button (click)="navigateToDashboard()">Add Admin</button>
     <div class="d-flex flex-wrap gap-2">
       <input
         type="text"
         [(ngModel)]="nameFilter"
-        placeholder="Filtrer par nom"
+        placeholder="Filter by name"
         class="form-control shadow-sm"
       />
       <input
         type="text"
         [(ngModel)]="emailFilter"
-        placeholder="Filtrer par email"
+        placeholder="Filter by email"
         class="form-control shadow-sm"
       />
     </div>
@@ -21,7 +21,7 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nom de l'admin</th>
+        <th>name admin</th>
         <th>Email</th>
         <th>Actions</th>
       </tr>
@@ -34,7 +34,7 @@
         <td>{{ admin.phoneNumber }}</td>
         <td>{{ admin.email }}</td>
         <td>
-          <button (click)="deleteAdmin(admin.id)">Supprimer</button>
+          <button (click)="deleteAdmin(admin.id)">Delete</button>
         </td>
       </tr>
     </tbody>

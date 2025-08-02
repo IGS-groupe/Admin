@@ -173,32 +173,62 @@ export class DemandeFormComponent implements OnInit {
         return;
       }
 
-      // Create a demande for each selected client
-      const demandes: Demande[] = selectedClientIds.map((clientId: any) => {
-        const selectedClient = this.clients.find(client => client.id == clientId);
-        console.log('Selected client:', selectedClient);
-        
-        return {
-          demandePour: selectedClient ? `${selectedClient.firstName || 'Unknown'} ${selectedClient.lastName || 'Unknown'}` : 'Unknown Unknown',
+      // Create a demande for each selected clientconst demande: Demande = {
+        const demande: Demande = {
+          demandePour: this.getSelectedClientsNames() || 'Clients sélectionnés',
           envoyeAuLaboratoire: formValues.envoyeAuLaboratoire,
           courrielsSupplementaires: formValues.courrielsSupplementaires,
           bonDeCommande: formValues.bonDeCommande,
           unEchantillon: false,
           langueDuCertificat: formValues.langueDuCertificat,
           commentairesInternes: formValues.commentairesInternes,
-          userId: clientId
+          clientIds: selectedClientIds // <-- send all selected clients
         };
-      });
 
-      console.log('🚀 Sending to backend:', demandes);
+      // console.log('🚀 Sending to backend:', demandes);
 
       // Submit all demandes
-      this.submitMultipleDemandes(demandes);
+      this.submitSingleDemande(demande);
+
 
     } else {
       this.demandeForm.markAllAsTouched();
     }
   }
+  async submitSingleDemande(demande: Demande): Promise<void> {
+  try {
+    const result = await Swal.fire({
+      title: 'Confirmation',
+      html: `Voulez-vous créer une demande pour ${demande.clientIds?.length || 0} clients ?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, créer',
+      cancelButtonText: 'Annuler',
+      reverseButtons: true
+    });
+
+    if (result.isConfirmed) {
+      await this.demandeService.createDemande(demande);
+
+      await Swal.fire({
+        title: 'Succès!',
+        text: `La demande a été créée avec succès`,
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+      this.router.navigate(['/demandelist']);
+    }
+  } catch (error: any) {
+    console.error('❌ Failed to submit demande:', error);
+    await Swal.fire({
+      title: 'Erreur',
+      text: 'Une erreur est survenue lors de la création de la demande',
+      icon: 'error'
+    });
+  }
+}
 
   async submitMultipleDemandes(demandes: Demande[]): Promise<void> {
     try {

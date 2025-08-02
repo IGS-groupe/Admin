@@ -118,6 +118,16 @@ export class UserService {
       headers: this.getAuthHeaders()
     }).then(response => response.data));
   }
+  updateUserWithFile(id: number, formData: FormData): Observable<User> {
+  return from(
+    axios.put<User>(`${this.apiUrl}/users/${id}/with-file`, formData, {
+      headers: {
+        ...this.getAuthHeaders(),
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => response.data)
+  );
+}
 
   // Delete user using Axios
   deleteUser(userId: number): Promise<any> {

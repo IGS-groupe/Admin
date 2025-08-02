@@ -14,5 +14,6 @@ export interface Role {
     password: string;
     genre: string;
     active: boolean;
+    imageUrl?: string | null; // <-- new nullable field
   }
   

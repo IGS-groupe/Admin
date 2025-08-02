@@ -57,6 +57,9 @@ export class ClientTableComponent implements OnInit {
       });
     }
   }
+  navigateToUpdateClient(clientId: number) {
+    this.router.navigate(['/update-client', clientId]);
+  }
 
   closeModal() {
     this.showModal = false;

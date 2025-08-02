@@ -1,27 +1,27 @@
 <div class="demande-table-wrapper">
  <div class="table-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
-    <button class="btn btn-primary shadow-sm" (click)="navigateToDemandeForm()">Ajouter une Demande</button>
+    <button class="btn btn-primary shadow-sm" (click)="navigateToDemandeForm()">Add Request</button>
     <div class="d-flex flex-wrap gap-2">
   <!-- Filter Inputs -->
   <div class="filter-bar-multiple">
     <input
       type="text"
       class="form-control"
-      placeholder="🔍 Rechercher par demande pour..."
+      placeholder="🔍 Search by request for..."
       [(ngModel)]="filterText"
       (input)="onFilterChange()" />
 
     <input
       type="text"
       class="form-control"
-      placeholder="Bon de commande..."
+      placeholder="Purchase order..."
       [(ngModel)]="filterBon"
       (input)="onFilterChange()" />
 
     <select class="form-control" [(ngModel)]="filterLangue" (change)="onFilterChange()">
-      <option value="">Toutes les langues</option>
-      <option value="Français">Français</option>
-      <option value="Anglais">Anglais</option>
+      <option value="">All languages</option>
+      <option value="Français">French</option>
+      <option value="Anglais">English</option>
      
     </select>
   </div>
@@ -36,14 +36,15 @@
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Demande Pour</th>
-          <th>Envoyé au Laboratoire</th>
-          <th>Emails Supplémentaires</th>
-          <th>Bon de Commande</th>
-          <th>Langue du Certificat</th>
-          <th>Commentaires</th>
-          <th>Action</th>
+         <th>#</th>
+        <th>Request For</th>
+        <th>Sent to Laboratory</th>
+        <th>Additional Emails</th>
+        <th>Purchase Order</th>
+        <th>Certificate Language</th>
+        <th>Comments</th>
+        <th>Action</th>
+
         </tr>
       </thead>
       <tbody>
@@ -56,7 +57,7 @@
           <td>{{ demande.langueDuCertificat }}</td>
           <td>{{ demande.commentairesInternes }}</td>
           <td>
-            <button class="btn details-btn" (click)="details(demande.demandeId!, demande.etat || '')">Détails</button>
+            <button class="btn details-btn" (click)="details(demande.demandeId!, demande.etat || '')">Details</button>
           </td>
         </tr>
       </tbody>

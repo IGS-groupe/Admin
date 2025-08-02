@@ -36,6 +36,11 @@ export const routes: Routes = [
         path: 'client-table',
         loadChildren: () => import('./views/client-table/routes').then((m) => m.routes)
       },
+      {
+          path: 'update-client/:id',
+          loadComponent: () => import('./views/update-client/update-client.component')
+            .then(m => m.UpdateClientComponent),
+        },
 
       {
         path: 'Listdemandes',

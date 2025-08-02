@@ -27,24 +27,25 @@ export class MessagesComponent implements OnInit {
     this.loadContacts();
   }
 
-  private async loadContacts(): Promise<void> {
-    this.loading = true;
-    try {
-      this.contacts = await this.contactService.getAllContacts();
-    } catch (error) {
-      console.error('Failed to load contacts:', error);
-      
-      // Show error message with SweetAlert2
-      await Swal.fire({
-        title: 'Erreur de chargement',
-        text: 'Impossible de charger les messages. Veuillez réessayer.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    } finally {
-      this.loading = false;
-    }
+  async loadContacts(): Promise<void> {
+  this.loading = true;
+  try {
+    this.contacts = await this.contactService.getAllContacts();
+  } catch (error) {
+    console.error('Failed to load contacts:', error);
+    await Swal.fire({
+      title: 'Erreur de chargement',
+      text: 'Impossible de charger les messages. Veuillez réessayer.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  } finally {
+    this.loading = false;
   }
+}
+
+
+
 
   async deleteMessage(contact: Contact): Promise<void> {
     const result = await Swal.fire({
@@ -101,8 +102,8 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR') + ' à ' + date.toLocaleTimeString('fr-FR');
+  formatDate(date: string | Date): string {
+    const d = date instanceof Date ? date : new Date(date);
+    return d.toLocaleDateString('fr-FR') + ' à ' + d.toLocaleTimeString('fr-FR');
   }
 }

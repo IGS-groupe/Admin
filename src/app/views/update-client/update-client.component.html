@@ -1,0 +1,53 @@
+<section class="container py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Edit Client Profile</h2>
+      <p *ngIf="generalError" class="alert alert-danger">{{ generalError }}</p>
+      <p class="lead">Update client information and logo</p>
+
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="bg-light p-3">
+        <p *ngIf="profileError" class="alert alert-danger">{{ profileError }}</p>
+
+        <div class="form-group">
+          <label for="firstName">Last name</label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">First name</label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input type="text" class="form-control" id="phone" formControlName="phoneNumber" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" />
+        </div>
+
+        <!-- Show existing imageUrl if available -->
+        <div *ngIf="clientImageUrl && !logoPreview" class="mb-3">
+          <p>Current Logo:</p>
+          <img [src]="clientImageUrl" alt="Client Logo" width="150" />
+        </div>
+
+        <div class="form-group">
+          <label for="logo">Upload New Logo</label>
+          <input type="file" class="form-control" id="logo" (change)="onFileSelected($event)" />
+        </div>
+
+        <!-- Show preview if new image selected -->
+        <div *ngIf="logoPreview" class="mb-3">
+          <p>New Preview:</p>
+          <img [src]="logoPreview" alt="Client Logo" width="150" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+      </form>
+    </div>
+  </div>
+</section>
