@@ -1,24 +1,25 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';  // <-- add AfterViewInit
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core'; // <-- add AfterViewInit
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.model';
 import Swal from 'sweetalert2';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 import { UserService } from '../../services/user.service';
 import { DemandeService } from '../../services/demande.service';
 import { Demande } from '../demandelist/demande.model';
 import * as XLSX from 'xlsx';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import 'select2';
 @Component({
   selector: 'app-demande-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgSelectModule ],
   templateUrl: './demande-form.component.html',
   styleUrls: ['./demande-form.component.scss']
 })
-export class DemandeFormComponent implements OnInit {
+export class DemandeFormComponent implements OnInit, AfterViewInit {
+   @ViewChild('select2') select2!: ElementRef;
   demandeForm!: FormGroup;
   clients: User[] = [];
   selectedFile: File | null = null;
@@ -42,7 +43,26 @@ export class DemandeFormComponent implements OnInit {
     });
 
     this.loadClients();
+    
   }
+  ngAfterViewInit(): void {
+    $(this.select2.nativeElement).select2({
+      placeholder: 'Select one or more clients',
+      width: '100%',
+      tags: true,               // <-- enables tag style
+      tokenSeparators: [',', ' ']
+    });
+
+    // Sync changes to Angular form
+    $(this.select2.nativeElement).on('change', (event: any) => {
+      const selectedValues = $(event.target).val();
+      this.demandeForm.patchValue({ demandePour: selectedValues });
+    });
+
+    const existingValues = this.demandeForm.get('demandePour')?.value || [];
+    $(this.select2.nativeElement).val(existingValues).trigger('change');
+  }
+
 
   loadClients(): void {
     this.userService.getClient().then(users => {

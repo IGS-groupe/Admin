@@ -38,6 +38,7 @@
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-angular": "~5.0.2",
     "@coreui/utils": "^2.0.2",
+    "@ng-select/ng-select": "^11.2.0",
     "axios": "^1.6.8",
     "axois": "^0.0.1-security",
     "chart.js": "^4.4.2",

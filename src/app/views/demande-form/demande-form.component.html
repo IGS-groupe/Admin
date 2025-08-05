@@ -33,43 +33,32 @@
       <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
         <!-- Row: Client selection -->
         <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="demandePour">Request for (Multiple selection allowed):</label>
-            <div class="client-selection-container">
-              <!-- Selected clients display -->
-              <div class="selected-clients-display" *ngIf="getSelectedClientsNames()">
-                <strong>Selected clients:</strong> {{ getSelectedClientsNames() }}
-              </div>
-              
-              <!-- Client checkboxes -->
-              <div class="form-group col-md-12">
-                  <select 
-                      id="demandePour" 
-                      class="form-control client-select" 
-                      formControlName="demandePour" 
-                      multiple>
-                      <option *ngFor="let client of clients" [value]="client.id">
-                        {{ client.firstName }} {{ client.lastName }} - {{ client.email }}
-                      </option>
-                    </select>
-                  <div class="invalid-feedback" 
-                      *ngIf="demandeForm.get('demandePour')?.invalid && demandeForm.get('demandePour')?.touched">
-                    Please select at least one client
-                  </div>
-                </div>
+        <div class="form-group col-md-12">
+          <label for="demandePour" class="form-label">Request for (Multiple selection allowed):</label>
 
-              
-              <!-- No clients selected message -->
-              <div class="no-selection-message" *ngIf="!getSelectedClientsNames()">
-                <small class="text-muted">Select one or more clients for this request</small>
-              </div>
-            </div>
-            <div class="invalid-feedback" 
-                 *ngIf="demandeForm.get('demandePour')?.invalid && demandeForm.get('demandePour')?.touched">
-              Please select at least one client
-            </div>
+          <ng-select
+            [items]="clients"
+            bindLabel="firstName"
+            bindValue="id"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            [searchable]="true"
+           
+            formControlName="demandePour"
+            class="custom-ng-select">
+            <ng-template ng-option-tmp let-item="item">
+              {{ item.firstName }} {{ item.lastName }} - {{ item.email }}
+            </ng-template>
+          </ng-select>
+
+          <div class="invalid-feedback"
+              *ngIf="demandeForm.get('demandePour')?.invalid && demandeForm.get('demandePour')?.touched">
+            Please select at least one client
           </div>
         </div>
+      </div>
+
+
 
         <!-- Row: Laboratory and Additional fields -->
         <div class="form-row">

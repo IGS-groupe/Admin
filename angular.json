@@ -37,6 +37,7 @@
               "src/assets"
             ],
             "styles": [
+                  "node_modules/select2/dist/css/select2.min.css",
                   "@angular/material/prebuilt-themes/indigo-pink.css",
                   "node_modules/ngx-toastr/toastr.css",
                   "src/scss/styles.scss"
@@ -102,11 +103,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/select2/dist/css/select2.min.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/scss/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/select2/dist/js/select2.min.js"
             ]
           }
         }
