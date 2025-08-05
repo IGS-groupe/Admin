@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';  // <-- add AfterViewInit
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,8 @@ import { UserService } from '../../services/user.service';
 import { DemandeService } from '../../services/demande.service';
 import { Demande } from '../demandelist/demande.model';
 import * as XLSX from 'xlsx';
-
+import * as $ from 'jquery';
+import 'select2';
 @Component({
   selector: 'app-demande-form',
   standalone: true,

@@ -5,24 +5,29 @@
       
       <!-- Excel Import Section -->
       <div class="excel-import-section mb-4">
-        <h5>Import from Excel</h5>
-        <div class="form-group">
-          <button type="button" class="btn btn-secondary mb-2" (click)="generateExcelTemplate()">
-            <i class="fas fa-download"></i> Télécharger le modèle Excel
-          </button>
+        <label for="excelFile" class="btn btn-excel">
+            <i class="fas fa-upload"></i> Importer un fichier Excel
+          </label>
           <input
             type="file"
-            class="form-control-file"
             id="excelFile"
+            class="d-none"
             accept=".xlsx, .xls"
             (change)="onFileSelected($event)"
           />
-          <small class="form-text text-muted">
-            Upload an Excel file containing one or more requests.
-            The file should have columns matching the form fields (demandePour, envoyeAuLaboratoire, etc.).
-          </small>
+        <div class="import-buttons">
+          <button 
+            type="button" 
+            class="btn btn-pdf" 
+            (click)="generateExcelTemplate()">
+            <i class="fas fa-file-excel"></i> Télécharger le modèle Excel
+          </button>
+
+          
         </div>
       </div>
+
+
 
       <h5>Or Create Single Request</h5>
       <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
@@ -37,22 +42,22 @@
               </div>
               
               <!-- Client checkboxes -->
-              <div class="client-checkboxes">
-                <div class="client-checkbox-item" *ngFor="let client of clients">
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      [checked]="isClientSelected(client.id)"
-                      (change)="toggleClientSelection(client.id)"
-                      class="client-checkbox"
-                    />
-                    <span class="checkmark"></span>
-                    <span class="client-name">
-                      {{ client.firstName }} {{ client.lastName }} - {{ client.email }}
-                    </span>
-                  </label>
+              <div class="form-group col-md-12">
+                  <select 
+                      id="demandePour" 
+                      class="form-control client-select" 
+                      formControlName="demandePour" 
+                      multiple>
+                      <option *ngFor="let client of clients" [value]="client.id">
+                        {{ client.firstName }} {{ client.lastName }} - {{ client.email }}
+                      </option>
+                    </select>
+                  <div class="invalid-feedback" 
+                      *ngIf="demandeForm.get('demandePour')?.invalid && demandeForm.get('demandePour')?.touched">
+                    Please select at least one client
+                  </div>
                 </div>
-              </div>
+
               
               <!-- No clients selected message -->
               <div class="no-selection-message" *ngIf="!getSelectedClientsNames()">
