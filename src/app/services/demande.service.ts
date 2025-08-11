@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Demande } from '../views/demandelist/demande.model';
-
+import { CreateDemandeResponse } from '../models/types';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +19,8 @@ export class DemandeService {
     };
   }
 
-  createDemande(demande: Demande): Promise<Demande> {
-    return axios.post<Demande>(this.apiUrl, demande, {
+  createDemande(demande: Demande): Promise<CreateDemandeResponse> {
+    return axios.post<CreateDemandeResponse>(this.apiUrl, demande, {
       headers: this.getAuthHeaders()
     }).then(response => response.data)
       .catch(error => {

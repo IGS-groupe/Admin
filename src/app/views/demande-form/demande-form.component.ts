@@ -132,13 +132,13 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
 
       // Demander confirmation à l'utilisateur
       const result = await Swal.fire({
-        title: 'Confirmation d\'importation',
-        html: `Voulez-vous importer ${demandes.length} demande(s) ?<br>
-              <small>Les demandes seront ajoutées à la base de données.</small>`,
+        title: 'Import Confirmation',
+        html: `Do you want to import${demandes.length} request(s)?<br>
+              <small>Requests will be added to the database.</small>`,
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Oui, importer',
-        cancelButtonText: 'Non, annuler',
+        confirmButtonText: 'Yes, import',
+        cancelButtonText: 'No, cancel',
         reverseButtons: true
       });
 
@@ -158,8 +158,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
 
         // Afficher le toast de succès
         await Swal.fire({
-          title: 'Succès!',
-          text: `${demandes.length} demande(s) ont été importée(s) avec succès`,
+          title: 'Success!',
+          text: `${demandes.length} request(s) have been successfully imported`,
           icon: 'success',
           timer: 2000,
           showConfirmButton: false
@@ -172,8 +172,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
       console.error('❌ Erreur lors du traitement:', error);
       // Afficher l'erreur à l'utilisateur
       await Swal.fire({
-        title: 'Erreur',
-        text: error.message || 'Une erreur est survenue lors de l\'importation',
+        title: 'Error',
+        text: error.message || 'An error occurred during import',
         icon: 'error',
         confirmButtonText: 'OK'
       });
@@ -187,8 +187,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
       
       if (!selectedClientIds || selectedClientIds.length === 0) {
         Swal.fire({
-          title: 'Erreur',
-          text: 'Veuillez sélectionner au moins un client',
+          title: 'Error',
+          text: 'Please select at least one customer',
           icon: 'error'
         });
         return;
@@ -220,11 +220,11 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
   try {
     const result = await Swal.fire({
       title: 'Confirmation',
-      html: `Voulez-vous créer une demande pour ${demande.clientIds?.length || 0} clients ?`,
+      html: `Do you want to create a request for ${demande.clientIds?.length || 0} clients ?`,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Oui, créer',
-      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Yes, create',
+      cancelButtonText: 'Cancel',
       reverseButtons: true
     });
 
@@ -232,8 +232,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
       await this.demandeService.createDemande(demande);
 
       await Swal.fire({
-        title: 'Succès!',
-        text: `La demande a été créée avec succès`,
+        title: 'Success!',
+        text: `The request was successfully created`,
         icon: 'success',
         timer: 2000,
         showConfirmButton: false
@@ -244,8 +244,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
   } catch (error: any) {
     console.error('❌ Failed to submit demande:', error);
     await Swal.fire({
-      title: 'Erreur',
-      text: 'Une erreur est survenue lors de la création de la demande',
+      title: 'Error',
+      text: 'An error occurred while creating the request',
       icon: 'error'
     });
   }
@@ -256,11 +256,11 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
       // Show confirmation dialog
       const result = await Swal.fire({
         title: 'Confirmation',
-        html: `Voulez-vous créer ${demandes.length} demande(s) pour les clients sélectionnés ?`,
+        html: `Do you want to create ${demandes.length} request(s) for selected clients?`,
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Oui, créer',
-        cancelButtonText: 'Annuler',
+        confirmButtonText: 'Yes, create',
+        cancelButtonText: 'Cancel',
         reverseButtons: true
       });
 
@@ -272,8 +272,8 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
 
         // Show success message
         await Swal.fire({
-          title: 'Succès!',
-          text: `${demandes.length} demande(s) ont été créée(s) avec succès`,
+          title: 'Success!',
+          text: `${demandes.length} request(s) have been successfully created`,
           icon: 'success',
           timer: 2000,
           showConfirmButton: false
@@ -285,16 +285,54 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
     } catch (error: any) {
       console.error('❌ Failed to submit demandes:', error);
       await Swal.fire({
-        title: 'Erreur',
-        text: 'Une erreur est survenue lors de la création des demandes',
+        title: 'Error',
+        text: 'An error occurred while creating requests',
         icon: 'error'
       });
     }
   }
 
-  navigateToNext(): void {
-    this.onSubmit();
-  }
+navigateToNext(): void {
+  // this.onSubmit();
+
+  // Navigate to the EchantillonForm route
+ if (this.demandeForm.valid) {
+      const formValues = this.demandeForm.value;
+      const selectedClientIds = formValues.demandePour; // Array of client IDs
+      
+      if (!selectedClientIds || selectedClientIds.length === 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Please select at least one customer',
+          icon: 'error'
+        });
+        return;
+      }
+
+      // Create a demande for each selected clientconst demande: Demande = {
+        const demande: Demande = {
+          demandePour: this.getSelectedClientsNames() || 'Clients sélectionnés',
+          envoyeAuLaboratoire: formValues.envoyeAuLaboratoire,
+          courrielsSupplementaires: formValues.courrielsSupplementaires,
+          bonDeCommande: formValues.bonDeCommande,
+          unEchantillon: false,
+          langueDuCertificat: formValues.langueDuCertificat,
+          commentairesInternes: formValues.commentairesInternes,
+          clientIds: selectedClientIds // <-- send all selected clients
+        };
+
+      // console.log('🚀 Sending to backend:', demandes);
+
+      // Submit all demandes
+      localStorage.setItem('demandeFormData', JSON.stringify(demande));
+      this.router.navigate(['/EchantillonForm']);
+
+
+    } else {
+      this.demandeForm.markAllAsTouched();
+    }
+   
+}
 
   // Utility methods for multi-select
   isClientSelected(clientId: any): boolean {
@@ -333,7 +371,7 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
     if (this.clients.length === 0) {
       Swal.fire({
         title: 'Attention',
-        text: 'Aucun client disponible. Le template utilisera des IDs d\'exemple.',
+        text: 'No clients available. The template will use example IDs.',
         icon: 'warning'
       });
     }
@@ -403,11 +441,11 @@ export class DemandeFormComponent implements OnInit, AfterViewInit {
 
     // Afficher un message d'information
     Swal.fire({
-      title: 'Template téléchargé',
-      html: `Le template Excel a été téléchargé avec des exemples pour:<br>
-             • Demande pour un seul client<br>
-             • Demande pour plusieurs clients<br><br>
-             <strong>Note:</strong> Pour sélectionner plusieurs clients, séparez les IDs par des virgules.`,
+      title: 'Downloaded template',
+      html: `The Excel template has been downloaded with examples for:<br>
+             • Request for a single client<br>
+             • Request for multiple clients<br><br>
+             <strong>Note:</strong> To select multiple customers, separate the IDs with commas.`,
       icon: 'info',
       confirmButtonText: 'Compris'
     });

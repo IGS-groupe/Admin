@@ -50,6 +50,14 @@ export const routes: Routes = [
         path: 'DemandeForm',
         loadComponent: () => import('./views/demande-form/demande-form.component').then((m) => m.DemandeFormComponent)
       },
+      {
+        path: 'EchantillonForm',
+        loadComponent: () => import('./views/fom-echantillon/fom-echantillon.component').then((m) => m.FomEchantillonComponent)
+      },
+      {
+        path: 'echantillon',
+        loadComponent: () => import('./views/echantillon/echantillon.component').then((m) => m.EchantillonComponent)
+      },
 
       {
         path: 'ListParamater',

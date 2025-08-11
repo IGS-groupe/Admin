@@ -1,0 +1,91 @@
+<div class="form-container">
+  <div class="main-title">
+    <h1>New Sample</h1>
+    <p class="required-note"><span>*</span>: obligatory</p>
+  </div>
+  <div class="card">
+    <form [formGroup]="echantillonForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="typeEchantillon">Sample type</label>
+          <select class="styled-select" formControlName="typeEchantillon" id="typeEchantillon">
+            <option value="" disabled selected hidden>Select Sample Type</option>
+            <option *ngFor="let typesEchantillon of typesEchantillons" [value]="typesEchantillon.value">
+              {{ typesEchantillon.display }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="returns">Back</label>
+          <select class="styled-select" formControlName="returns" id="returns">
+            <option value="" disabled selected hidden>Select Back</option>
+            <option *ngFor="let retour of retours" [value]="retour.value">
+              {{ retour.display }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="disposes">Arrange</label>
+          <select class="styled-select" formControlName="disposes" id="disposes">
+            <option value="" disabled selected hidden>Select Arrange</option>
+            <option *ngFor="let disposer of disposers" [value]="disposer.value">
+              {{ disposer.display }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nomEchantillon">Sample Name</label>
+        <input type="text" class="form-control" formControlName="nomEchantillon" id="nomEchantillon" />
+      </div>
+
+      <div class="form-group">
+        <label for="lieuPrelevement">Location Sampling</label>
+        <input type="text" class="form-control" formControlName="lieuPrelevement" id="lieuPrelevement" />
+      </div>
+
+      <div class="form-group">
+        <label for="addressRetourner">Return address</label>
+        <input type="text" class="form-control" formControlName="addressRetourner" id="addressRetourner" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dateFinPrelevement">Collection end date</label>
+          <input type="date" class="form-control" formControlName="dateFinPrelevement" id="dateFinPrelevement" />
+        </div>
+        <div class="form-group">
+          <label for="heureFinPrelevement">Sampling end time</label>
+          <input type="time" class="form-control" formControlName="heureFinPrelevement" id="heureFinPrelevement" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Priority</label>
+        <div class="priority-options">
+          <label>
+            <input type="radio" formControlName="priorite" value="STANDARD" />
+            Standard
+          </label>
+          <label>
+            <input type="radio" formControlName="priorite" value="RUSH" />
+            Rushing
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="commentairesInternes">Internal sample feedback</label>
+        <textarea class="form-control" formControlName="commentairesInternes" id="commentairesInternes"></textarea>
+      </div>
+
+      <div class="button-container">
+        <button type="button" class="btn btn-secondary" (click)="navigateToPrevious()">Previous</button>
+        <button type="submit" class="btn btn-primary">Next</button>
+      </div>
+    </form>
+  </div>
+</div>

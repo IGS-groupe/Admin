@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Echantillon } from '../models/echantillon.model';
 import { Parameter } from '../models/parameter.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,7 @@ import { Parameter } from '../models/parameter.model';
 export class EchantillonService {
   private apiUrl = 'http://localhost:4000/api/echantillons'; // Adjust this to your actual API endpoint
 
-  constructor() { }
-
+  constructor(private http: HttpClient) { }
   private getAuthHeaders() {
     const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
     return {
@@ -19,7 +20,13 @@ export class EchantillonService {
       'Content-Type': 'application/json'
     };
   }
-
+  createEchantillon(demandeId: number, echantillon: Echantillon[]): Observable<any> {
+    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(`${this.apiUrl}/All/${demandeId}`, echantillon,{ headers });
+  }
   saveEchantillon(echantillon: Echantillon): Promise<Echantillon> {
     return axios.post<Echantillon>(this.apiUrl, echantillon, {
       headers: this.getAuthHeaders()
