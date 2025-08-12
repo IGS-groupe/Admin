@@ -38,7 +38,23 @@ export class DemandelistComponent implements OnInit {
   navigateToDemandeForm(): void {
     this.router.navigate(['/DemandeForm']);
   }
+   async onExportExcelChange(row: Demande, newValue: boolean | null) {
+    if (!row.demandeId) { return; }
+    const oldValue = row.exportExcel ?? false;
 
+    // optimistic UI
+    row.exportExcel = newValue;
+
+    try {
+      await this.demandeService.setExportExcel(row.demandeId);
+      // success: keep newValue
+    } catch (e) {
+      console.error('Failed to update exportExcel', e);
+      // revert on error
+      row.exportExcel = oldValue;
+      // optionally show a toast/snackbar here
+    }
+  }
   onFilterChange(): void {
     const text = this.filterText.toLowerCase();
     const langue = this.filterLangue.toLowerCase();

@@ -48,6 +48,14 @@ export class DemandeService {
         throw error;
       });
   }
+   /** Set exportExcel explicitly: true | false | null */
+  setExportExcel(id: number): Promise<Demande> {
+    return axios.post<Demande>(
+      `${this.apiUrl}/${id}/export-excel/toggle`,
+      {},                                   // <-- body
+      { headers: this.getAuthHeaders() }    // <-- config with headers
+    ).then(r => r.data);
+  }
 
   updateDemande(id: number, demande: Demande): Promise<Demande> {
     return axios.put<Demande>(`${this.apiUrl}/${id}`, demande, {

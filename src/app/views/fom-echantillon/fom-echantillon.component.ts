@@ -79,6 +79,7 @@ export class FomEchantillonComponent implements OnInit {
   loadExistingData() {
     const demandeData = localStorage.getItem('demandeFormData');
     this.demandes = demandeData ? JSON.parse(demandeData) : [];
+    this.demandes.unEchantillon = true; // Ensure unEchantillon is set to true
     this.existingData = localStorage.getItem('echantillonFormData');
     console.log('Existing Data:', this.existingData);
     if (this.existingData) {

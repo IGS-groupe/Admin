@@ -1,6 +1,6 @@
 export enum Langue {
-    FRANCAIS = "FRANCAIS",
-    ANGLAIS = "ANGLAIS"
+  FRANCAIS = "FRANCAIS",
+  ANGLAIS = "ANGLAIS"
 }
 
 // Client interface for multiple client support
@@ -23,22 +23,25 @@ export class Demande {
   langueDuCertificat: string;
   commentairesInternes: string;
   userId?: string;
-  
+
   // New fields for multiple clients support
   clientIds?: number[];
   clients?: Client[];
-  
+
+  // NEW: nullable boolean for export to Excel
+  exportExcel?: boolean | null;
+
   constructor(
-    // demandeId: number,
     demandePour: string,
     envoyeAuLaboratoire: string,
     courrielsSupplementaires: string,
     bonDeCommande: string,
     unEchantillon: boolean,
-    etat: string, 
+    etat: string,
     langueDuCertificat: string,
     commentairesInternes: string,
-    clientIds?: number[]
+    clientIds?: number[],
+    exportExcel?: boolean | null
   ) {
     this.demandePour = demandePour;
     this.envoyeAuLaboratoire = envoyeAuLaboratoire;
@@ -49,6 +52,8 @@ export class Demande {
     this.commentairesInternes = commentairesInternes;
     this.etat = etat;
     this.clientIds = clientIds;
+
+    // allow true/false/null
+    this.exportExcel = exportExcel ?? null;
   }
 }
-  

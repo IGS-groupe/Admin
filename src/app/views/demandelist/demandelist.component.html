@@ -56,9 +56,24 @@
           <td>{{ demande.bonDeCommande }}</td>
           <td>{{ demande.langueDuCertificat }}</td>
           <td>{{ demande.commentairesInternes }}</td>
-          <td>
-            <button class="btn details-btn" (click)="details(demande.demandeId!, demande.etat || '')">Details</button>
+         <td>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <button class="btn details-btn" (click)="details(demande.demandeId!, demande.etat || '')">
+                Details
+              </button>
+
+              <!-- Export to Excel selector -->
+              <select
+                class="form-select form-select-sm"
+                [ngModel]="demande.exportExcel"
+                (ngModelChange)="onExportExcelChange(demande, $event)"
+              >
+                <option [ngValue]="false">Do not export</option>
+                <option [ngValue]="true">Export</option>
+              </select>
+            </div>
           </td>
+
         </tr>
       </tbody>
     </table>
