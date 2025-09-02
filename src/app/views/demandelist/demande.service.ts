@@ -1,79 +1,66 @@
+// src/app/services/demande.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import axios, { AxiosInstance } from 'axios';
 import { Demande } from './demande.model';
-import axios from 'axios';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable({ providedIn: 'root' })
 export class DemandeService {
-  private apiUrl = 'http://localhost:4000/api/demandes';  // Adjust this to your API's base URL
+  private apiBase = 'http://localhost:4000/api';
+  private http: AxiosInstance;
 
-  constructor() { }
+  constructor() {
+    // Make sure nothing global overrides cookie auth
+    try { delete (axios.defaults.headers as any)?.common?.Authorization; } catch {}
 
-  private getAuthHeaders() {
-    const token = localStorage.getItem('Admintoken');  // Retrieve the token from localStorage
-    return {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    };
+    this.http = axios.create({
+      baseURL: this.apiBase,
+      withCredentials: true, // <-- send/receive JWT cookie
+    });
   }
 
+  // --- Create
   createDemande(demande: Demande): Promise<Demande> {
-    return axios.post<Demande>(this.apiUrl, demande, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error creating demande', error);
-        throw error;
-      });
+    return this.http.post<Demande>('/demandes', demande, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => { console.error('Error creating demande', err); throw err; });
   }
 
+  // --- Read all
   getDemandes(): Promise<Demande[]> {
-    return axios.get<Demande[]>(this.apiUrl, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching demandes', error);
-        throw error;
-      });
+    return this.http.get<Demande[]>('/demandes')
+      .then(res => res.data)
+      .catch(err => { console.error('Error fetching demandes', err); throw err; });
   }
 
+  // --- Read one
   getDemandeById(id: number): Promise<Demande> {
-    return axios.get<Demande>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching demande', error);
-        throw error;
-      });
+    return this.http.get<Demande>(`/demandes/${id}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error fetching demande', err); throw err; });
   }
-   /** Set exportExcel explicitly: true | false | null */
+
+  /** Toggle exportExcel flag (server decides the new value) */
   setExportExcel(id: number): Promise<Demande> {
-    return axios.post<Demande>(
-      `${this.apiUrl}/${id}/export-excel/toggle`,
-      {},                                   // <-- body
-      { headers: this.getAuthHeaders() }    // <-- config with headers
-    ).then(r => r.data);
+    return this.http.post<Demande>(`/demandes/${id}/export-excel/toggle`, {})
+      .then(res => res.data)
+      .catch(err => { console.error('Error toggling export-excel', err); throw err; });
   }
 
+  // --- Update
   updateDemande(id: number, demande: Demande): Promise<Demande> {
-    return axios.put<Demande>(`${this.apiUrl}/${id}`, demande, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error updating demande', error);
-        throw error;
-      });
+    return this.http.put<Demande>(`/demandes/${id}`, demande, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => { console.error('Error updating demande', err); throw err; });
   }
 
+  // --- Delete
   deleteDemande(id: number): Promise<void> {
-    return axios.delete<void>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error deleting demande', error);
-        throw error;
-      });
+    return this.http.delete<void>(`/demandes/${id}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error deleting demande', err); throw err; });
   }
 }

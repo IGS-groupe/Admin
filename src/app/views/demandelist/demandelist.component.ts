@@ -20,10 +20,7 @@ export class DemandelistComponent implements OnInit {
   filterBon: string = '';
 
   constructor(private demandeService: DemandeService, private router: Router) {
-    const userId = localStorage.getItem('AdminId');
-    if (!userId) {
-      this.router.navigate(['/account/login']);
-    }
+    
   }
 
   ngOnInit(): void {

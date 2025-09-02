@@ -1,111 +1,89 @@
 // src/app/services/demande.service.ts
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { Demande } from '../views/demandelist/demande.model';
 import { CreateDemandeResponse } from '../models/types';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DemandeService {
-  private apiUrl = 'http://localhost:4000/api/demandes'; // Adjust this to your actual API endpoint
+  private apiBase = 'http://localhost:4000/api';
+  private http: AxiosInstance;
 
-  constructor() { }
+  constructor() {
+    // Make sure NO leftover global Authorization header interferes
+    try { delete (axios.defaults.headers as any)?.common?.Authorization; } catch {}
 
-  private getAuthHeaders() {
-    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
-    return {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    };
+    this.http = axios.create({
+      baseURL: this.apiBase,
+      withCredentials: true // ⬅️ send the jwt cookie
+    });
   }
 
+  // --- CREATE
   createDemande(demande: Demande): Promise<CreateDemandeResponse> {
-    return axios.post<CreateDemandeResponse>(this.apiUrl, demande, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error creating demande', error);
-        throw error;
-      });
+    return this.http.post<CreateDemandeResponse>(`/demandes`, demande, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => { console.error('Error creating demande', err); throw err; });
   }
 
+  // --- READ ONE
   getDemandeById(id: number): Promise<Demande> {
-    return axios.get<Demande>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching demande by id', error);
-        throw error;
-      });
+    return this.http.get<Demande>(`/demandes/${id}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error fetching demande by id', err); throw err; });
   }
 
+  // --- READ ALL
   getAllDemandes(): Promise<Demande[]> {
-    return axios.get<Demande[]>(this.apiUrl, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching all demandes', error);
-        throw error;
-      });
+    return this.http.get<Demande[]>(`/demandes`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error fetching all demandes', err); throw err; });
   }
 
+  // --- UPDATE
   updateDemande(id: number, demande: Demande): Promise<Demande> {
-    return axios.put<Demande>(`${this.apiUrl}/${id}`, demande, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error updating demande', error);
-        throw error;
-      });
-  }
-  updateState(id: number, etat: string): Promise<any> {
-    return axios.put<any>(`${this.apiUrl}/etat/${id}`, { etat }, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error updating state of demande', error);
-        throw error;
-      });
+    return this.http.put<Demande>(`/demandes/${id}`, demande, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => { console.error('Error updating demande', err); throw err; });
   }
 
+  updateState(id: number, etat: string): Promise<any> {
+    return this.http.put<any>(`/demandes/etat/${id}`, { etat }, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => { console.error('Error updating state of demande', err); throw err; });
+  }
+
+  // --- DELETE
   deleteDemande(id: number): Promise<void> {
-    return axios.delete<void>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error deleting demande', error);
-        throw error;
-      });
+    return this.http.delete<void>(`/demandes/${id}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error deleting demande', err); throw err; });
   }
-  
-  // New methods for managing multiple clients
+
+  // --- CLIENT LINKS
   addClientToDemande(demandeId: number, clientId: number): Promise<any> {
-    return axios.post<any>(`${this.apiUrl}/${demandeId}/clients/${clientId}`, {}, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error adding client to demande', error);
-        throw error;
-      });
+    return this.http.post<any>(`/demandes/${demandeId}/clients/${clientId}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error adding client to demande', err); throw err; });
   }
-  
+
   removeClientFromDemande(demandeId: number, clientId: number): Promise<any> {
-    return axios.delete<any>(`${this.apiUrl}/${demandeId}/clients/${clientId}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error removing client from demande', error);
-        throw error;
-      });
+    return this.http.delete<any>(`/demandes/${demandeId}/clients/${clientId}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error removing client from demande', err); throw err; });
   }
-  
+
   getDemandesByClientId(clientId: number): Promise<Demande[]> {
-    return axios.get<Demande[]>(`${this.apiUrl}/client/${clientId}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching demandes by client id', error);
-        throw error;
-      });
+    return this.http.get<Demande[]>(`/demandes/client/${clientId}`)
+      .then(res => res.data)
+      .catch(err => { console.error('Error fetching demandes by client id', err); throw err; });
   }
 }

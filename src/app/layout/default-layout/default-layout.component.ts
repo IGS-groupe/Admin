@@ -62,16 +62,20 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   private async checkAdminStatus(): Promise<void> {
+    const token = localStorage.getItem('Admintoken');
+    if (!token) {
+      this.isAdmin = false;
+      return;
+    }
+
     this.isAdmin = await this.authService.isAdmin();
-    console.log(this.isAdmin);
     if (!this.isAdmin) {
       this.navItems = this.navItems.filter(item => item.name !== 'Admin');
-      console.log(this.isAdmin);
     }
   }
+
   logout() {
     this.authService.logout().then(() => {
-      localStorage.removeItem('token'); 
       this.router.navigate(['/login']); 
     }).catch(error => {
       console.error('Logout failed:', error);

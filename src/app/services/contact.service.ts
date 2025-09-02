@@ -1,60 +1,62 @@
+// src/app/services/contact.service.ts
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { Contact } from '../models/Contact.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-// src/app/services/contact.service.ts// Adjust the path and name as necessary
-  private apiUrl = 'http://localhost:4000/api/contacts'; // Adjust this to your actual API endpoint
+  private apiBase = 'http://localhost:4000/api';
+  private http: AxiosInstance;
 
-  constructor() { }
-
-  private getAuthHeaders() {
-    const token = localStorage.getItem('Admintoken'); // Retrieve the token from localStorage
-    return {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    };
+  constructor() {
+    // Send HttpOnly JWT cookie automatically on every request
+    this.http = axios.create({
+      baseURL: this.apiBase,
+      withCredentials: true
+    });
   }
 
+  // --- Read all
   getAllContacts(): Promise<Contact[]> {
-    return axios.get<Contact[]>(this.apiUrl, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching all contacts', error);
-        throw error;
+    return this.http.get<Contact[]>('/contacts')
+      .then(res => res.data)
+      .catch(err => {
+        console.error('Error fetching all contacts', err);
+        throw err;
       });
   }
 
+  // --- Read one
   getContactById(id: number): Promise<Contact> {
-    return axios.get<Contact>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching contact by id', error);
-        throw error;
+    return this.http.get<Contact>(`/contacts/${id}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error('Error fetching contact by id', err);
+        throw err;
       });
   }
 
+  // --- Update
   updateContact(id: number, contact: Contact): Promise<Contact> {
-    return axios.put<Contact>(`${this.apiUrl}/${id}`, contact, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error updating contact', error);
-        throw error;
-      });
+    return this.http.put<Contact>(`/contacts/${id}`, contact, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.data)
+    .catch(err => {
+      console.error('Error updating contact', err);
+      throw err;
+    });
   }
 
+  // --- Delete
   deleteContact(id: number): Promise<void> {
-    return axios.delete<void>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    }).then(response => response.data)
-      .catch(error => {
-        console.error('Error deleting contact', error);
-        throw error;
+    return this.http.delete<void>(`/contacts/${id}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error('Error deleting contact', err);
+        throw err;
       });
   }
-  }
+}
