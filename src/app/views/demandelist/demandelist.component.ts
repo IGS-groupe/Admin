@@ -64,7 +64,10 @@ export class DemandelistComponent implements OnInit {
     );
   }
 
-  details(demandeId: number, etat: string) {
-    this.router.navigate(['/echantillonList'], { queryParams: { demandeId, etat } });
+    details(demandeId: number, etat: string) {
+    this.router.navigate([`/demande-excel/${demandeId}`], {
+      queryParams: { etat }
+    });
   }
+
 }

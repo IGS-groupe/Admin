@@ -1,0 +1,59 @@
+<div class="client-table-container">
+  <div class="table-header d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
+    <button (click)="navigateToCreate()">Add Project</button>
+
+    <div class="d-flex flex-wrap gap-2">
+      <!-- Title filter -->
+      <input
+        type="text"
+        [(ngModel)]="titleFilter"
+        placeholder="Filter by title"
+        class="form-control shadow-sm"
+      />
+      <!-- Category filter -->
+      <input
+        type="text"
+        [(ngModel)]="categoryFilter"
+        placeholder="Filter by category"
+        class="form-control shadow-sm"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="errorMsg" class="alert alert-danger mb-3">{{ errorMsg }}</div>
+  <div *ngIf="loading" class="alert alert-info mb-3">Loading…</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Bullets</th>
+        <th>Created</th>
+        <th style="width:120px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of filteredProjects()">
+        <td>{{ project.id }}</td>
+        <td>{{ project.title }}</td>
+        <td>{{ project.category || '—' }}</td>
+        <td>
+          <ng-container *ngIf="(project.bullets?.length || 0) > 0; else noBullets">
+            {{ project.bullets.length }} item(s)
+          </ng-container>
+          <ng-template #noBullets>—</ng-template>
+        </td>
+        <!-- <td>{{ project.createdAt | date:'short' }}</td> -->
+        <td>
+          <button (click)="deleteProject(project.id!)">Delete</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="!loading && filteredProjects().length === 0">
+        <td colspan="6" class="text-muted" style="text-align:center;">No projects found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

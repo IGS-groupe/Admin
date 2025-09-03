@@ -1,0 +1,91 @@
+<div class="app-container">
+  <div class="card-container">
+    <div class="card-body">
+      <h4>Create Project Card</h4>
+
+      <form (ngSubmit)="handleSubmit()">
+        <!-- Row 1: Title & Category -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="title">Title <span class="req">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              placeholder="e.g., Lab Auditing & Operation"
+              [(ngModel)]="formData.title"
+              required
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="category">Category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              name="category"
+              placeholder="e.g., Operations"
+              [(ngModel)]="formData.category"
+            />
+          </div>
+        </div>
+
+        <!-- Row 2: Sort index & Active -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="sortIndex">Sort index</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sortIndex"
+              name="sortIndex"
+              placeholder="e.g., 1"
+              [(ngModel)]="formData.sortIndex"
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="active">Active</label>
+            <select
+              id="active"
+              name="active"
+              class="form-control"
+              [(ngModel)]="formData.active"
+            >
+              <option [ngValue]="true">Active</option>
+              <option [ngValue]="false">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 3: Bullets -->
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="bulletsText">Bullets (one per line)</label>
+            <textarea
+              id="bulletsText"
+              name="bulletsText"
+              class="form-control"
+              rows="6"
+              placeholder="• Audit, review QA/QC practices and interim operation…&#10;• Base engineering for the commissioning of 1 tpd demo-plant…"
+              [(ngModel)]="formData.bulletsText"
+            ></textarea>
+            <small class="form-text text-muted">
+              Tip: Each line will become a bullet in the card.
+            </small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn" [disabled]="saving">
+          {{ saving ? 'Saving…' : 'Create card' }}
+        </button>
+
+        <!-- Messages -->
+        <div class="mt-3 text-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
+        <div class="mt-3 text-success" *ngIf="successMsg">{{ successMsg }}</div>
+      </form>
+    </div>
+  </div>
+</div>

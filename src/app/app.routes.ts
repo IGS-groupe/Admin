@@ -21,9 +21,19 @@ export const routes: Routes = [
         loadChildren: () => import('./views/demandelist/routes').then((m) => m.routes)
         },
         {
+          path: 'demande-excel/:demandeId',
+          loadComponent: () =>
+            import('./views/demande-excel-list/demande-excel-list.component').then(
+              (m) => m.DemandeExcelListComponent
+            ),
+          data: { title: 'Demande Excel Files' }
+        },
+
+        {
           path: 'echantillonList',
           loadComponent: () => import('./views/list-echantillon/list-echantillon.component').then(m => m.ListEchantillonComponent),
         },
+
       {
         path: 'Employess',
         loadComponent: () => import('./views/list-employee/list-employee.component').then(m => m.ListEmployeeComponent),
@@ -50,6 +60,22 @@ export const routes: Routes = [
         path: 'DemandeForm',
         loadComponent: () => import('./views/demande-form/demande-form.component').then((m) => m.DemandeFormComponent)
       },
+      {
+      path: 'project-cards',
+      loadComponent: () =>
+        import('./views/project-card-list/project-card-list.component')
+          .then(m => m.ProjectCardListComponent),
+      data: { title: 'Project Cards' }
+    },
+
+      {
+          path: 'project-cards/create',
+        loadComponent: () =>
+          import('./views/project-card-create/project-card-create.component')
+            .then(m => m.ProjectCardCreateComponent),
+        data: { title: 'Create Project Card' }
+      },
+      
       {
         path: 'EchantillonForm',
         loadComponent: () => import('./views/fom-echantillon/fom-echantillon.component').then((m) => m.FomEchantillonComponent)

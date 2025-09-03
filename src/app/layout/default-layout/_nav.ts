@@ -37,6 +37,11 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-notes' }
   },
   {
+    name: 'Project Cards',
+    url: '/project-cards',
+    iconComponent: { name: 'cil-layers' }
+  },
+  {
     name: 'News',
     url: '/news', // Add leading slash for absolute path
     iconComponent: { name: 'cil-notes' },

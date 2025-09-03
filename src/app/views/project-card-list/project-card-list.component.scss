@@ -1,0 +1,44 @@
+.client-table-container {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.table-header button {
+  background: #3b82f6;
+  color: #fff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+  }
+
+  thead th {
+    background: #f0f4ff;
+    font-weight: 600;
+  }
+
+  tbody tr:hover {
+    background: #f9fafb;
+  }
+
+  button {
+    background: #ef4444;
+    color: #fff;
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}
