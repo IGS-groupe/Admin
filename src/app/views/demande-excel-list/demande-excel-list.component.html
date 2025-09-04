@@ -25,29 +25,7 @@
 </div>
 
 <!-- Status controls -->
-<div class="status-controls status-controls--left">
-  <select [(ngModel)]="selectedStatut" class="status-select" aria-label="Select status">
-    <option *ngFor="let status of statusOptions" [ngValue]="status.value">
-      {{ status.label }}
-    </option>
-  </select>
 
-  <span class="badge badge-soft" *ngIf="selectedStatut">
-    {{ selectedStatusLabel }}
-  </span>
-
-  <button
-    class="update-button"
-    (click)="updateAllDemandeStatuses(selectedStatut!)"
-    [disabled]="!selectedStatut"
-    title="Apply status to this demande"
-  >
-    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M13 2 3 14h7v8l11-14h-8l0-8Z" fill="currentColor"/>
-    </svg>
-    <span>Change state</span>
-  </button>
-</div>
 
 
 
@@ -259,7 +237,29 @@
     </tr>
   </tbody>
 </table>
+<div class="status-controls status-controls--left">
+  <select [(ngModel)]="selectedStatut" class="status-select" aria-label="Select status">
+    <option *ngFor="let status of statusOptions" [ngValue]="status.value">
+      {{ status.label }}
+    </option>
+  </select>
 
+  <span class="badge badge-soft" *ngIf="selectedStatut">
+    {{ selectedStatusLabel }}
+  </span>
+
+  <button
+    class="update-button"
+    (click)="updateAllDemandeStatuses(selectedStatut!)"
+    [disabled]="!selectedStatut"
+    title="Apply status to this demande"
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13 2 3 14h7v8l11-14h-8l0-8Z" fill="currentColor"/>
+    </svg>
+    <span>Change state</span>
+  </button>
+</div>
   </div>
 </div>
 
