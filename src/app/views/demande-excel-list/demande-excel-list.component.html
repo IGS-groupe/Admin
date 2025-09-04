@@ -83,10 +83,11 @@
     <!-- Actions -->
     <div style="margin-left:auto; display:flex; gap:8px;">
       <button
-        class="btn"
+        class="btn btn-ghost"
         (click)="uploadSingle()"
         [disabled]="!singleFile || uploading"
         title="Upload selected file"
+        aria-label="Upload selected file"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 20h14v-2H5v2Zm7-16 5 5h-3v4h-4v-4H7l5-5Z" fill="currentColor"/>
@@ -98,8 +99,9 @@
         class="btn btn-ghost"
         type="button"
         (click)="clearSingle()"
-
+        [disabled]="!singleFile || uploading"
         title="Clear selection"
+        aria-label="Clear selection"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
