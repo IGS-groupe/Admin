@@ -114,40 +114,46 @@
 }
 
 /* === Dropdown panel === */
+/* Make the dropdown panel solid, visible, and above nearby elements */
 ::ng-deep .custom-ng-select .ng-dropdown-panel {
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff !important;
+  border: 1px solid #cfd8e3 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 24px rgba(15, 39, 71, 0.12) !important;
+  overflow: hidden !important;
+  z-index: 2000 !important; /* raise if inside modals */
 }
 
-/* Options inside dropdown */
+/* Ensure the internal items host is also white */
+::ng-deep .custom-ng-select .ng-dropdown-panel .ng-dropdown-panel-items,
+::ng-deep .custom-ng-select .ng-dropdown-panel .scroll-host {
+  background: #fff !important;
+}
+
+/* Default option background = white; readable text */
 ::ng-deep .custom-ng-select .ng-option {
-  padding: 8px 12px;
-  font-size: 14px;
+  background-color: #fff !important;
+  color: #222 !important;
 }
 
 /* Hovered option */
-::ng-deep .custom-ng-select .ng-option-marked {
-  background-color: #e7f3ff !important; /* hover */
-  color: #333 !important;
-}
-
-/* Selected option */
-::ng-deep .custom-ng-select .ng-option-selected {
-  background-color: #d0e7ff !important; /* selected */
-  color: #222 !important;
-}
-
-/* Hover effect for all dropdown options */
+::ng-deep .custom-ng-select .ng-option-marked,
 ::ng-deep .custom-ng-select .ng-option:hover {
-  background-color: #e7f3ff !important; /* same as marked */
+  background-color: #e7f3ff !important;
   color: #333 !important;
 }
 
-/* Keep selected items highlighted even after hover */
+/* Selected option (keeps a subtle highlight) */
 ::ng-deep .custom-ng-select .ng-option-selected {
-  background-color: #d0e7ff !important;
+  background-color: #d9ebff !important;
   color: #222 !important;
 }
+
+/* Optional: the select input container itself (not dropdown) */
+::ng-deep .custom-ng-select .ng-select-container {
+  background: #fff; /* prevent inherited transparency */
+}
+
 ::ng-deep .custom-ng-select .ng-option-marked,
 ::ng-deep .custom-ng-select .ng-option:hover {
   background-color: #e7f3ff !important;

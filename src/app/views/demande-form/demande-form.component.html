@@ -4,7 +4,7 @@
       <h4>New Request</h4>
       
       <!-- Excel Import Section -->
-      <div class="excel-import-section mb-4">
+      <!-- <div class="excel-import-section mb-4">
         <label for="excelFile" class="btn btn-excel">
             <i class="fas fa-upload"></i> Importer un fichier Excel
           </label>
@@ -25,7 +25,7 @@
 
           
         </div>
-      </div>
+      </div> -->
 
 
 
@@ -37,19 +37,20 @@
           <label for="demandePour" class="form-label">Request for (Multiple selection allowed):</label>
 
           <ng-select
+            class="custom-ng-select"
             [items]="clients"
             bindLabel="firstName"
             bindValue="id"
             [multiple]="true"
             [closeOnSelect]="false"
             [searchable]="true"
-           
-            formControlName="demandePour"
-            class="custom-ng-select">
+            [appendTo]="'body'"
+            formControlName="demandePour">
             <ng-template ng-option-tmp let-item="item">
               {{ item.firstName }} {{ item.lastName }} - {{ item.email }}
             </ng-template>
           </ng-select>
+
 
           <div class="invalid-feedback"
               *ngIf="demandeForm.get('demandePour')?.invalid && demandeForm.get('demandePour')?.touched">
@@ -129,7 +130,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-        <button type="button" class="btn btn-secondary ml-2" (click)="navigateToNext()">Next</button>
+        <!-- <button type="button" class="btn btn-secondary ml-2" (click)="navigateToNext()">Next</button> -->
       </form>
     </div>
   </div>
